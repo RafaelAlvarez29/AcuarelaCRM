@@ -915,7 +915,8 @@
                         <p class="mt-1 text-gray-600">Aún no has registrado ningún cliente. Empieza con el botón de "Nuevo Proyecto" o con el botón "+ Crear Cliente".</p>
                         <div class="mt-4">
                              <button onclick="navigate('create_client')" class="btn-primary">
-                                + Crear Cliente
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>+ Crear Cliente (Solo)</span>
                             </button>
                         </div>
                     </div>
@@ -926,8 +927,9 @@
             viewContainer.innerHTML = headerHtml + `
                 <div class="card divide-y divide-gray-100">
                     <div class="flex justify-end p-4">
-                        <button onclick="navigate('create_client')" class="btn-primary text-sm p-2">
-                            + Crear Cliente
+                        <button onclick="navigate('create_client')" class="btn-primary text-sm p-2 flex items-center space-x-1">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>+ Crear Cliente (Solo)</span>
                         </button>
                     </div>
                     
@@ -940,10 +942,10 @@
                     </div>
 
                     ${filteredClients.map(client => `
-                        <div class="client-grid hover:bg-gray-50 transition" onclick="navigate('client_detail', '${client.id}')">
+                        <div class="client-grid hover:bg-gray-50 transition">
                             
-                            <!-- Columna 1: Cliente/Contacto (click principal) -->
-                            <div class="flex items-center space-x-4 cursor-pointer">
+                            <!-- Columna 1: Cliente/Contacto (click para detalle) -->
+                            <div class="flex items-center space-x-4 cursor-pointer" onclick="navigate('client_detail', '${client.id}')">
                                 ${getClientAvatarHtml(client)}
                                 <div>
                                     <p class="font-semibold text-gray-800">${client.name}</p>
@@ -1242,7 +1244,7 @@
                 <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_list')">
                     &larr; Volver a Clientes
                 </button>
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">Crear Nuevo Cliente</h2>
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Crear Nuevo Cliente (Solo)</h2>
                 <div class="card p-6 max-w-xl mx-auto">
                     <form id="client-only-form" onsubmit="event.preventDefault(); handleClientCreation(false);">
                         <div class="mb-4">
@@ -1291,7 +1293,7 @@
                                 <option value="" disabled ${!clientId ? 'selected' : ''}>Selecciona un Cliente</option>
                                 ${clientOptions}
                             </select>
-                            <p class="text-xs text-gray-500 mt-1">¿Cliente nuevo? Haz click en Clientes y usa el botón "+ Crear Cliente".</p>
+                            <p class="text-xs text-gray-500 mt-1">¿Cliente nuevo? Haz click en Clientes y usa el botón "+ Crear Cliente (Solo)".</p>
                         </div>
 
                         <div class="mb-4">
