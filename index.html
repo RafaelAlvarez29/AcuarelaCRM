@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acuarela Design Studio CRM</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para usar la fuente Inter y un esquema de color pastel -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            /* Fondo muy claro y suave */
+        }
+
+        /* Estilos personalizados para la estética Acuarela (bordes suaves) */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            /*box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);*/
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .btn-primary {
+            background-color: #0ea5e9;
+            /* Sky-500 (Azul Acuarela) */
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.15s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0284c7;
+            /* Sky-600 */
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+
+        .nav-link-active {
+            background-color: #ebf8ff;
+            /* Lightest blue */
+            color: #0ea5e9;
+        }
+
+        /* Estilos AÑADIDOS para las tarjetas de Dashboard al estilo Acuarela */
+        .watercolor-card {
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+           /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+            color: #1f2937;
+            /* Dark gray for text */
+            font-weight: 600;
+        }
+
+        .wc-green {
+            background: url('azul-acuarela.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Simula tono verde claro */
+        .wc-orange {
+            background: url('verde-acuarela.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Simula tono naranja claro */
+        .wc-blue {
+            background: url('melon-acuarela.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Simula tono azul claro */
+        .wc-value {
+            font-size: 2.25rem;
+            /* text-4xl */
+            font-weight: 800;
+            /* font-extrabold */
+            margin-top: 4px;
+        }
+
+        .wc-title {
+            font-size: 0.875rem;
+            /* text-sm */
+            font-weight: 700;
+            /* font-bold */
+            letter-spacing: 0.05em;
+            /* tracking-wider */
+            text-transform: uppercase;
+        }
+
+        /* Estilo para la badge del título - color pastel */
+        .title-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 10px;
+            margin-left: 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background-color: #f3f4f6;
+            /* Gris pastel muy claro */
+            color: #4b5563;
+            /* Texto gris oscuro */
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <!-- Contenedor Principal de la Aplicación (Flex para Sidebar + Contenido) -->
+    <div class="flex min-h-screen bg-[#f7f9fb]">
+
+        <!-- 1. Barra Lateral (Sidebar) -->
+        <!-- Usamos 'hidden' por defecto en móvil, 'lg:flex' para mostrar en desktop -->
+        <aside id="sidebar"
+            class="w-64 fixed top-0 left-0 h-full bg-white shadow-xl z-50 p-4 flex-col transition-transform transform -translate-x-full lg:flex lg:translate-x-0">
+
+            <!-- Botón para cerrar el menú en móvil -->
+            <button class="absolute top-4 right-4 lg:hidden text-gray-500 hover:text-gray-800"
+                onclick="toggleSidebar()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Logo y Nombre de Marca -->
+            <div class="py-4 mb-6 border-b border-gray-100 flex items-center">
+                <!-- Imagen Placeholder para Logo Acuarela -->
+                <img src="311449776_615059936938111_2931967811620169613_n.jpg" alt="Logo Acuarela"
+                    class="rounded-lg mr-2">
+                <!--<h2 class="text-2xl font-extrabold text-gray-800">CRM</h2> -->
+            </div>
+
+            <!-- Navegación Principal -->
+            <nav id="main-navigation" class="space-y-2 flex-grow">
+                <!-- Dashboard -->
+                <button id="nav-dashboard"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    onclick="navigate('dashboard')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span>Dashboard</span>
+                </button>
+                <!-- Clientes -->
+                <button id="nav-client_list"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    onclick="navigate('client_list')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2a3 3 0 015.356-1.857M7 20h4m-4 0v-2c0-.656-.126-1.283-.356-1.857M7 20H4a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
+                    </svg>
+                    <span>Clientes</span>
+                </button>
+                <!-- Ajustes -->
+                <button id="nav-settings"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    onclick="navigate('settings')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.942 3.321.815 2.573 2.573a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.942 1.543-.815 3.321-2.573 2.573a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.942-3.321-.815-2.573-2.573a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.942-1.543.815-3.321 2.573-2.573a1.724 1.724 0 002.573-1.066z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>Ajustes</span>
+                </button>
+            </nav>
+
+            <!-- Botón de Acción Rápida (Abajo) -->
+            <div class="mt-auto pt-4 border-t border-gray-100">
+                <button class="btn-primary w-full flex items-center justify-center space-x-2"
+                    onclick="checkForClientsBeforeProject()">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <span>Nuevo Proyecto</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Overlay para móvil cuando el menú está abierto -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden lg:hidden"
+            onclick="toggleSidebar()"></div>
+
+
+        <!-- 2. Área Principal de Contenido (Offset para pantallas grandes) -->
+        <div id="main-content-wrapper" class="flex-grow lg:ml-64 flex flex-col w-full">
+
+            <!-- Botón de menú (solo visible en móvil) -->
+            <button class="fixed top-4 left-4 z-30 lg:hidden p-2 bg-white rounded-lg shadow-md"
+                onclick="toggleSidebar()">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <!-- Header/Hero Section (con imagen de fondo) -->
+            <!-- Añadimos padding-left en móvil para que no choque con el botón de menú -->
+            <header id="main-header" class="w-full h-32 bg-cover bg-center shadow-md relative lg:pl-0 pl-16"
+                style="background-image: url('heaer.png');">
+                <div class=" inset-0 bg-black opacity-30 rounded-b-lg"></div>
+                <div class="p-6 relative z-10 text-white flex flex-col justify-end h-full">
+                    <h1 class="text-4xl font-bold">Panel de Gestión</h1>
+                    <p class="text-sm">Bienvenida de vuelta, dueña de Acuarela.</p>
+                </div>
+            </header>
+
+            <!-- Contenedor del Contenido Principal -->
+            <main class="flex-grow w-full p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+                <!-- Este div será el punto de montaje de todas las vistas -->
+                <div id="view-container">
+                    <div class="text-center p-20 text-gray-500">Cargando aplicación...</div>
+                </div>
+
+                <!-- Modal Base (Oculto por defecto) -->
+                <div id="modal-container"
+                    class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="card p-6 w-full max-w-sm">
+                        <h3 id="modal-title" class="text-xl font-bold mb-4">Título</h3>
+                        <p id="modal-message" class="text-gray-600 mb-6">Mensaje</p>
+                        <div class="flex justify-end space-x-3">
+                            <button id="modal-cancel-btn"
+                                class="px-4 py-2 text-gray-600 rounded-md hover:bg-gray-100 transition">Cancelar</button>
+                            <button id="modal-action-btn" class="btn-primary">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script de la Aplicación (Lógica y Datos) -->
+    <script>
+        // ====================================================================
+        // 1. ESTRUCTURA DE DATOS Y UTILIDADES DE ALMACENAMIENTO (localStorage)
+        // ====================================================================
+        const STORAGE_KEY = 'acuarela_crm_data';
+
+        let state = {
+            clients: [],
+            projects: [],
+            payments: [],
+            settings: {},
+            currentView: 'dashboard',
+            currentClientId: null,
+            currentProjectId: null,
+            sortKey: 'creationDate',
+            sortDir: 'desc',
+            searchTerm: '',
+        };
+
+        const PROJECT_STATUSES = [
+            'Pendiente de inicio',
+            'En proceso',
+            'Pendiente de pago',
+            'Por entregar',
+            'Entregado',
+            'Cancelado'
+        ];
+
+        // Mensajes de WhatsApp predeterminados
+        const DEFAULT_MESSAGES = {
+            'Pendiente de inicio': 'Hola [NOMBRE_CLIENTE], te escribo para confirmar que hemos agendado tu proyecto "[NOMBRE_PROYECTO]". Estaremos en contacto pronto para iniciar. ¡Gracias por confiar en Acuarela!',
+            'En proceso': 'Hola [NOMBRE_CLIENTE], te informo que tu proyecto "[NOMBRE_PROYECTO]" está actualmente en proceso de diseño/elaboración. Te mantendremos al tanto de cualquier avance. Saludos.',
+            'Pendiente de pago': 'Hola [NOMBRE_CLIENTE], tu proyecto "[NOMBRE_PROYECTO]" está finalizado y listo para la entrega. El saldo pendiente es de [SALDO_PENDIENTE]. Una vez recibido el pago, procederemos a enviarte los archivos finales. ¡Gracias!',
+            'Por entregar': 'Hola [NOMBRE_CLIENTE], tu proyecto "[NOMBRE_PROYECTO]" ya está pagado y listo. Por favor, confirma por qué medio deseas la entrega de los archivos finales.',
+            'Entregado': 'Hola [NOMBRE_CLIENTE], tu proyecto "[NOMBRE_PROYECTO]" ha sido entregado exitosamente. ¡Muchas gracias por tu preferencia!',
+            'Cancelado': 'Hola [NOMBRE_CLIENTE], tu proyecto "[NOMBRE_PROYECTO]" ha sido marcado como cancelado.',
+        };
+
+        /**
+         * Inicializa o carga los datos desde localStorage.
+         */
+        function loadData() {
+            try {
+                const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+                if (data) {
+                    state.clients = data.clients || [];
+                    state.projects = data.projects || [];
+                    state.payments = data.payments || [];
+                    state.settings = {
+                        ...DEFAULT_MESSAGES,
+                        ...(data.settings || {})
+                    };
+                } else {
+                    state.settings = DEFAULT_MESSAGES;
+                    saveData();
+                }
+            } catch (e) {
+                console.error("Error al cargar datos:", e);
+                // Si falla, inicializa con defaults
+                state.settings = DEFAULT_MESSAGES;
+            }
+            console.log("Datos cargados:", state);
+        }
+
+        /**
+         * Guarda el estado actual en localStorage.
+         */
+        function saveData() {
+            const dataToSave = {
+                clients: state.clients,
+                projects: state.projects,
+                payments: state.payments,
+                settings: state.settings,
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+        }
+
+        /**
+         * Actualiza la clase activa en los botones de navegación.
+         */
+        function updateActiveClass(view) {
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('nav-link-active');
+                btn.classList.remove('text-[#0ea5e9]');
+                btn.classList.add('text-gray-600');
+            });
+            const activeBtn = document.getElementById(`nav-${view}`);
+            if (activeBtn) {
+                activeBtn.classList.add('nav-link-active');
+                activeBtn.classList.add('text-[#0ea5e9]');
+                activeBtn.classList.remove('text-gray-600');
+            }
+        }
+
+
+        /**
+         * Navega a una nueva vista y fuerza el renderizado.
+         * @param {string} view - Nombre de la vista ('dashboard', 'client_detail', etc.)
+         * @param {string|null} clientId - ID del cliente (opcional)
+         * @param {string|null} projectId - ID del proyecto (opcional)
+         */
+        function navigate(view, clientId = null, projectId = null) {
+            state.currentView = view;
+            state.currentClientId = clientId;
+            state.currentProjectId = projectId;
+            updateActiveClass(view); // Actualiza el estilo del menú
+            renderApp();
+            window.scrollTo(0, 0); // Desplaza al inicio de la página
+
+            // Oculta el sidebar si estamos en móvil y navegamos
+            if (window.innerWidth < 1024) {
+                const sidebar = document.getElementById('sidebar');
+                if (!sidebar.classList.contains('-translate-x-full')) {
+                    toggleSidebar();
+                }
+            }
+        }
+
+        /**
+         * Función para mostrar/ocultar el sidebar en móvil.
+         */
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        /**
+         * Verifica si hay clientes antes de intentar crear un proyecto.
+         */
+        function checkForClientsBeforeProject() {
+            if (state.clients.length === 0) {
+                showModal('Crear Cliente Primero', 'No hay clientes registrados. Debes crear un cliente antes de asignarle un proyecto.', false).then(() => {
+                    navigate('create_client');
+                });
+            } else {
+                navigate('create_project');
+            }
+        }
+
+        // ====================================================================
+        // 2. LÓGICA DE NEGOCIO Y CÁLCULOS
+        // ====================================================================
+
+        /**
+         * Calcula el saldo pendiente y el total abonado para un proyecto.
+         * @param {string} projectId - ID del proyecto.
+         * @returns {{totalPaid: number, balance: number}}
+         */
+        function calculateProjectBalance(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (!project) return { totalPaid: 0, balance: 0 };
+
+            const totalPaid = state.payments
+                .filter(p => p.projectId === projectId)
+                .reduce((sum, payment) => sum + parseFloat(payment.amount), 0);
+
+            const balance = parseFloat(project.totalPrice) - totalPaid;
+            return { totalPaid: parseFloat(totalPaid.toFixed(2)), balance: parseFloat(balance.toFixed(2)) };
+        }
+
+        /**
+         * Genera un color pastel aleatorio.
+         * Fuente: https://stackoverflow.com/a/43235760/910023
+         */
+        const generatePastelColor = (seed) => {
+            let hash = 0;
+            for (let i = 0; i < seed.length; i++) {
+                hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const h = hash % 360;
+            // Usamos saturación y luminosidad bajas para el efecto pastel
+            return `hsl(${h}, 55%, 75%)`;
+        };
+
+        /**
+         * Genera el HTML para el avatar del cliente (foto o inicial).
+         * @param {Object} client Objeto cliente.
+         * @returns {string} HTML del avatar.
+         */
+        const getClientAvatarHtml = (client) => {
+            if (client.photoBase64) {
+                // Si tiene foto, la mostramos
+                return `<img src="${client.photoBase64}" alt="${client.name.charAt(0)} Avatar" class="w-10 h-10 object-cover rounded-full">`;
+            } else {
+                // Si no tiene foto, mostramos la inicial con color pastel
+                const initial = client.name.charAt(0).toUpperCase();
+                const color = generatePastelColor(client.name);
+                return `
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg text-white shadow-md" 
+                         style="background-color: ${color};">
+                        ${initial}
+                    </div>
+                `;
+            }
+        };
+
+        /**
+         * Redimensiona la imagen y la convierte a Base64 (800x800).
+         * @param {File} file Archivo de imagen subido.
+         * @returns {Promise<string|null>} Base64 de la imagen redimensionada o null.
+         */
+        const resizeImageAndConvertToBase64 = (file) => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        const MAX_SIZE = 800;
+                        let width = img.width;
+                        let height = img.height;
+
+                        // Redimensionamiento básico manteniendo aspecto y máximo 800x800
+                        if (width > height) {
+                            if (width > MAX_SIZE) {
+                                height *= MAX_SIZE / width;
+                                width = MAX_SIZE;
+                            }
+                        } else {
+                            if (height > MAX_SIZE) {
+                                width *= MAX_SIZE / height;
+                                height = MAX_SIZE;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 80% calidad
+                        resolve(dataUrl);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => resolve(null);
+                reader.readAsDataURL(file);
+            });
+        };
+
+        /**
+         * Genera el enlace de WhatsApp con el mensaje predefinido.
+         * @param {object} client - Objeto cliente.
+         * @param {object} project - Objeto proyecto (opcional).
+         * @returns {string} URL de WhatsApp.
+         */
+        function generateWhatsAppLink(client, project) {
+            const status = project ? project.status : null;
+            const messageTemplate = status ? state.settings[status] : 'Hola [NOMBRE_CLIENTE], te escribo desde Acuarela Design Studio.';
+
+            const { balance } = project ? calculateProjectBalance(project.id) : { balance: 0 };
+            const formattedBalance = `$${balance.toFixed(2)}`;
+
+            const message = messageTemplate
+                .replace('[NOMBRE_CLIENTE]', client.name)
+                .replace('[NOMBRE_PROYECTO]', project ? project.name : 'tu proyecto')
+                .replace('[SALDO_PENDIENTE]', formattedBalance);
+
+            // Sanitizar el número de teléfono (solo dígitos)
+            const number = client.whatsapp_number.replace(/[^0-9]/g, '');
+
+            // Usamos un número predefinido si no hay número, para no romper el link
+            const safeNumber = number.length >= 10 ? number : '5215512345678'; // Ejemplo MX
+            const encodedMessage = encodeURIComponent(message);
+            return `https://wa.me/${safeNumber}?text=${encodedMessage}`;
+        }
+
+        /**
+         * Crea el HTML para una badge con el conteo.
+         * @param {number} count El número a mostrar.
+         * @returns {string} HTML de la badge.
+         */
+        const createBadge = (count) => {
+            // Utilizamos un color pastel neutro para la badge
+            return `<span class="title-badge bg-gray-200 text-gray-700">${count}</span>`;
+        };
+
+        // ====================================================================
+        // 3. MANIPULACIÓN DE DATOS (CRUD SIMPLIFICADO)
+        // ====================================================================
+
+        /**
+         * Añade o actualiza un cliente.
+         */
+        function saveClient(clientData, navigateToDetail = true) {
+            if (!clientData.id) {
+                clientData.id = crypto.randomUUID();
+                state.clients.push(clientData);
+            } else {
+                const index = state.clients.findIndex(c => c.id === clientData.id);
+                if (index !== -1) {
+                    state.clients[index] = { ...state.clients[index], ...clientData };
+                }
+            }
+            saveData();
+            if (navigateToDetail) {
+                navigate('client_detail', clientData.id);
+            }
+            return clientData.id;
+        }
+
+        /**
+         * Añade o actualiza un proyecto.
+         */
+        function saveProject(projectData) {
+            if (!projectData.id) {
+                projectData.id = crypto.randomUUID();
+                projectData.creationDate = new Date().toISOString();
+                projectData.status = projectData.status || PROJECT_STATUSES[0];
+                state.projects.push(projectData);
+            } else {
+                const index = state.projects.findIndex(p => p.id === projectData.id);
+                if (index !== -1) {
+                    // Solo actualiza los campos permitidos y la fecha de última actualización
+                    state.projects[index] = {
+                        ...state.projects[index],
+                        ...projectData,
+                        lastUpdated: new Date().toISOString()
+                    };
+                }
+            }
+            saveData();
+            navigate('project_detail', projectData.clientId, projectData.id);
+        }
+
+        /**
+         * Registra un nuevo abono.
+         */
+        function addPayment(projectId, amount) {
+            const payment = {
+                id: crypto.randomUUID(),
+                projectId: projectId,
+                amount: parseFloat(amount),
+                date: new Date().toISOString(),
+            };
+            state.payments.push(payment);
+            saveData();
+            // Refresca la vista de proyecto
+            const project = state.projects.find(p => p.id === projectId);
+            if (project) {
+                navigate('project_detail', project.clientId, projectId);
+            }
+        }
+
+        // ====================================================================
+        // 4. FUNCIONES DE RENDERING Y UI
+        // ====================================================================
+
+        const viewContainer = document.getElementById('view-container');
+
+        /** Muestra el modal de forma síncrona. */
+        function showModal(title, message, isConfirm = false) {
+            return new Promise(resolve => {
+                const container = document.getElementById('modal-container');
+                document.getElementById('modal-title').innerHTML = title;
+                // *** CORRECCIÓN CRÍTICA: Usamos innerHTML para renderizar HTML del formulario ***
+                document.getElementById('modal-message').innerHTML = message;
+
+                const cancelBtn = document.getElementById('modal-cancel-btn');
+                const actionBtn = document.getElementById('modal-action-btn');
+
+                cancelBtn.classList.toggle('hidden', !isConfirm);
+
+                actionBtn.onclick = () => {
+                    container.classList.add('hidden');
+                    resolve(true);
+                };
+
+                cancelBtn.onclick = () => {
+                    container.classList.add('hidden');
+                    resolve(false);
+                };
+
+                container.classList.remove('hidden');
+            });
+        }
+
+
+        /**
+         * Muestra una notificación temporal.
+         */
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('app');
+            let bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            let notification = document.createElement('div');
+            notification.className = `fixed top-16 right-4 p-3 rounded-lg text-white font-semibold shadow-xl ${bgColor} z-50 transition-opacity duration-300`;
+            notification.textContent = message;
+            document.getElementById('main-content-wrapper').appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('opacity-0');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+
+        /**
+         * Mapea el estado a colores de Tailwind.
+         */
+        function getStatusClass(status) {
+            switch (status) {
+                case 'Pendiente de inicio': return 'bg-gray-200 text-gray-700';
+                case 'En proceso': return 'bg-blue-200 text-blue-700';
+                case 'Pendiente de pago': return 'bg-yellow-200 text-yellow-700 font-bold';
+                case 'Por entregar': return 'bg-purple-200 text-purple-700';
+                case 'Entregado': return 'bg-green-200 text-green-700';
+                case 'Cancelado': return 'bg-red-200 text-red-700';
+                default: return 'bg-gray-100 text-gray-500';
+            }
+        }
+
+        /**
+         * Renderiza una fila de proyecto simple para listas.
+         */
+        function renderProjectListItem(project, client) {
+            const { balance, totalPaid } = calculateProjectBalance(project.id);
+            const isFullyPaid = balance <= 0.01;
+            const balanceText = balance > 0.01 ? `<span class="text-red-600 font-bold">$${balance.toFixed(2)} Pendiente</span>` : `<span class="text-green-600 font-bold">Saldo Pagado</span>`;
+
+            return `
+                <div class="p-4 border-b last:border-b-0 hover:bg-gray-50 transition cursor-pointer flex justify-between items-center"
+                     onclick="navigate('project_detail', '${project.clientId}', '${project.id}')">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800">${project.name}</p>
+                        <p class="text-sm text-gray-500">Cliente: ${client.name}</p>
+                        <p class="text-sm text-gray-500">Total: $${parseFloat(project.totalPrice).toFixed(2)} | Abonado: $${totalPaid.toFixed(2)}</p>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                         <span class="status-badge ${getStatusClass(project.status)}">${project.status}</span>
+                         <p class="text-sm">${balanceText}</p>
+                         ${project.deliveryDate ? `<p class="text-xs text-blue-600">Entrega: ${new Date(project.deliveryDate).toLocaleDateString('es-ES')}</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ====================================================================
+        // 5. RENDERING DE VISTAS ESPECÍFICAS
+        // ====================================================================
+
+        function renderDashboard() {
+            const allProjects = state.projects.map(p => ({
+                ...p,
+                client: state.clients.find(c => c.id === p.clientId),
+                ...calculateProjectBalance(p.id)
+            }));
+
+            const activeProjects = allProjects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado');
+            const pastProjects = allProjects.filter(p => p.status === 'Entregado' || p.status === 'Cancelado');
+
+            // CÁLCULOS FINANCIEROS
+            const totalIncome = allProjects.reduce((sum, p) => sum + p.totalPaid, 0);
+
+            // CORRECCIÓN DE SYNTAX ERROR: paréntesis agregado al final
+            const totalPendingIncome = activeProjects.reduce((sum, p) => p.balance > 0 ? sum + p.balance : sum, 0);
+
+            const pendingPaymentProjects = activeProjects.filter(p => p.balance > 0);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const upcomingDeadlines = activeProjects
+                .filter(p => p.deliveryDate && new Date(p.deliveryDate) > today)
+                .sort((a, b) => new Date(a.deliveryDate) - new Date(b.deliveryDate))
+                .slice(0, 5); // Mostrar los 5 más cercanos
+
+            const imminentDeadlines = upcomingDeadlines.filter(p => new Date(p.deliveryDate) <= tomorrow);
+
+            // Determinar si hay algún proyecto para mostrar los estados vacíos
+            const hasProjects = allProjects.length > 0;
+
+            // RENDERIZADO
+            viewContainer.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h2>
+                
+                ${hasProjects ? `
+                    <!-- Resumen Financiero Estilo Acuarela -->
+                    <div class="card p-4 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Ingresos Acumulados (Verde) -->
+                            <div class="watercolor-card wc-green">
+                                <p class="wc-title">Ingreso Total</p>
+                                <p class="wc-value">$${totalIncome.toFixed(2)}</p>
+                            </div>
+
+                            <!-- Pagos Pendientes (Naranja) -->
+                            <div class="watercolor-card wc-orange">
+                                <p class="wc-title">Pagos Pendientes</p>
+                                <p class="wc-value">${pendingPaymentProjects.length}</p>
+                                <p class="text-sm mt-1 font-semibold text-gray-600">$${totalPendingIncome.toFixed(2)}</p>
+                            </div>
+
+                            <!-- Trabajos Activos / Próximas Entregas (Azul) -->
+                            <div class="watercolor-card wc-blue">
+                                <p class="wc-title">Próximas Entregas</p>
+                                <p class="wc-value">${imminentDeadlines.length}</p>
+                                <p class="text-sm mt-1 font-semibold text-gray-600">(${activeProjects.length} Trabajos Activos)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alertas y Próximas Fechas (Contenido anterior) -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <!-- Pagos Pendientes -->
+                        <div class="card p-5">
+                            <h3 class="text-xl font-semibold mb-4 text-red-600 flex items-center">
+                                Trabajos con Pagos Pendientes
+                                ${createBadge(pendingPaymentProjects.length)}
+                            </h3>
+                            ${pendingPaymentProjects.length > 0 ?
+                        pendingPaymentProjects.map(p => `
+                                    <div class="flex justify-between items-center py-2 border-b last:border-b-0">
+                                        <p class="text-sm text-gray-800 font-medium cursor-pointer hover:text-[#0ea5e9]" onclick="navigate('project_detail', '${p.clientId}', '${p.id}')">${p.name} (${p.client.name})</p>
+                                        <span class="text-red-500 font-semibold">$${p.balance.toFixed(2)}</span>
+                                    </div>
+                                `).join('') :
+                        '<p class="text-gray-500 italic">¡Todo al día! No hay pagos pendientes.</p>'
+                    }
+                        </div>
+
+                        <!-- Próximos Recordatorios de Entrega -->
+                        <div class="card p-5">
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600 flex items-center">
+                                Próximas Fechas de Entrega
+                                ${createBadge(upcomingDeadlines.length)}
+                            </h3>
+                            ${upcomingDeadlines.length > 0 ?
+                        upcomingDeadlines.map(p => `
+                                    <div class="flex justify-between items-center py-2 border-b last:border-b-0">
+                                        <p class="text-sm text-gray-800 font-medium cursor-pointer hover:text-[#0ea5e9]" onclick="navigate('project_detail', '${p.clientId}', '${p.id}')">${p.name} (${p.client.name})</p>
+                                        <span class="text-blue-500 font-semibold">${new Date(p.deliveryDate).toLocaleDateString('es-ES')}</span>
+                                    </div>
+                                `).join('') :
+                        '<p class="text-gray-500 italic">No hay entregas urgentes a la vista.</p>'
+                    }
+                        </div>
+                    </div>
+
+                    <!-- Trabajos Activos -->
+                    <div class="card p-5 mb-6">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700 flex items-center">
+                            Trabajos Activos
+                            ${createBadge(activeProjects.length)}
+                        </h3>
+                        <div class="divide-y divide-gray-100">
+                            ${activeProjects.map(p => renderProjectListItem(p, p.client)).join('')}
+                            ${activeProjects.length === 0 ? '<p class="text-gray-500 p-4">No hay proyectos activos.</p>' : ''}
+                        </div>
+                    </div>
+
+                    <!-- Trabajos Anteriores -->
+                    <div class="card p-5">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700 flex items-center">
+                            Trabajos Anteriores
+                            ${createBadge(pastProjects.length)}
+                        </h3>
+                        <div class="divide-y divide-gray-100">
+                            ${pastProjects.map(p => renderProjectListItem(p, p.client)).join('')}
+                            ${pastProjects.length === 0 ? '<p class="text-gray-500 p-4">No hay proyectos finalizados o cancelados.</p>' : ''}
+                        </div>
+                    </div>
+                ` : `
+                    <div class="card p-10 text-center bg-blue-50">
+                        <svg class="mx-auto h-12 w-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <h3 class="mt-2 text-xl font-bold text-gray-900">¡Bienvenida a Acuarela CRM!</h3>
+                        <p class="mt-1 text-gray-600">Tu panel está listo. Comienza creando tu primer cliente y proyecto para ver el resumen de tus finanzas y trabajos.</p>
+                        <div class="mt-6">
+                            <button class="btn-primary flex items-center space-x-2 mx-auto" onclick="checkForClientsBeforeProject()">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                <span>Añadir Primer Cliente/Proyecto</span>
+                            </button>
+                        </div>
+                    </div>
+                `}
+            `;
+        }
+
+        function renderClientList() {
+            const allProjects = state.projects.map(p => ({
+                ...p,
+                ...calculateProjectBalance(p.id)
+            }));
+
+            // Combina clientes con sus proyectos para el resumen
+            const clientsWithSummary = state.clients.map(client => {
+                const clientProjects = allProjects.filter(p => p.clientId === client.id);
+                const activeCount = clientProjects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado').length;
+                const totalBalance = clientProjects.reduce((sum, p) => sum + p.balance, 0);
+
+                return { ...client, activeCount, totalBalance };
+            });
+
+            // Lógica de Búsqueda y Ordenamiento
+            const term = state.searchTerm.toLowerCase();
+            const filteredClients = clientsWithSummary.filter(c => {
+                if (!term) return true;
+                return c.name.toLowerCase().includes(term) || c.whatsapp_number.includes(term);
+            });
+
+            // Cabecera con Búsqueda
+            const headerHtml = `
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800 flex items-center">
+                        Clientes
+                        ${createBadge(state.clients.length)}
+                    </h2>
+                    <div class="relative w-full md:w-1/3 min-w-[200px]">
+                         <input type="text" id="search-input" value="${state.searchTerm}"
+                                class="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:ring-[#0ea5e9] focus:border-[#0ea5e9] transition"
+                                placeholder="Buscar por Nombre o WhatsApp..."
+                                oninput="handleSearch(event)">
+                         <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+            `;
+
+            if (state.clients.length === 0) {
+                viewContainer.innerHTML = headerHtml + `
+                    <div class="card p-10 text-center bg-gray-50">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2a3 3 0 015.356-1.857M7 20h4m-4 0v-2c0-.656-.126-1.283-.356-1.857M7 20H4a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <h3 class="mt-2 text-xl font-bold text-gray-900">Lista de Clientes Vacía</h3>
+                        <p class="mt-1 text-gray-600">Aún no has registrado ningún cliente. Empieza con el botón de "Nuevo Proyecto" o con el botón "+ Crear Cliente".</p>
+                        <div class="mt-4">
+                             <button onclick="navigate('create_client')" class="btn-primary">
+                                + Crear Cliente
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            viewContainer.innerHTML = headerHtml + `
+                <div class="card divide-y divide-gray-100">
+                    <div class="flex justify-end p-4">
+                        <button onclick="navigate('create_client')" class="btn-primary text-sm p-2">
+                            + Crear Cliente
+                        </button>
+                    </div>
+                    ${filteredClients.map(client => `
+                        <div class="p-4 hover:bg-gray-50 transition flex justify-between items-center cursor-pointer"
+                             onclick="navigate('client_detail', '${client.id}')">
+                            <div class="flex items-center space-x-4">
+                                ${getClientAvatarHtml(client)}
+                                <div>
+                                    <p class="text-lg font-semibold text-gray-800">${client.name}</p>
+                                    <p class="text-sm text-gray-500">WhatsApp: ${client.whatsapp_number}</p>
+                                    ${client.email ? `<p class="text-xs text-gray-400">Email: ${client.email}</p>` : ''}
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-medium ${client.activeCount > 0 ? 'text-blue-600' : 'text-gray-500'}">${client.activeCount} Trabajos Activos</span>
+                                <p class="text-sm ${client.totalBalance > 0 ? 'text-red-600' : 'text-green-600'}">Saldo Pendiente: $${client.totalBalance.toFixed(2)}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                    ${filteredClients.length === 0 && state.clients.length > 0 ? '<p class="text-gray-500 p-4 text-center">No se encontraron clientes con el criterio de búsqueda.</p>' : ''}
+                </div>
+            `;
+        }
+
+        function renderClientDetail(clientId) {
+            const client = state.clients.find(c => c.id === clientId);
+            if (!client) {
+                return viewContainer.innerHTML = '<p class="p-8 text-center text-red-500">Cliente no encontrado.</p>';
+            }
+
+            const clientProjects = state.projects
+                .filter(p => p.clientId === clientId)
+                .map(p => ({
+                    ...p,
+                    ...calculateProjectBalance(p.id)
+                }));
+
+            viewContainer.innerHTML = `
+                <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_list')">
+                    &larr; Volver a Clientes
+                </button>
+                <div class="card p-6 mb-6">
+                    <div class="flex justify-between items-start mb-4 pb-4">
+                        <div class="flex items-center space-x-4">
+                             ${getClientAvatarHtml(client)}
+                             <h2 class="text-3xl font-bold text-gray-800">${client.name}</h2>
+                        </div>
+                        <button class="text-sm text-gray-500 hover:text-red-500" onclick="deleteClient('${client.id}')">
+                            Eliminar Cliente
+                         </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-lg font-medium text-gray-700">Contacto:</p>
+                            <p class="text-gray-600">WhatsApp: ${client.whatsapp_number}</p>
+                            <p class="text-gray-600">Email: ${client.email || 'N/A'}</p>
+                        </div>
+                        <div class="flex items-center justify-end">
+                            <a href="https://wa.me/${client.whatsapp_number.replace(/[^0-9]/g, '')}" target="_blank"
+                               class="btn-primary flex items-center space-x-2">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
+                                    <g transform="translate(0,720) scale(0.1,-0.1)">
+                                        <path d="M6255 6844 c-540 -35 -1107 -229 -1555 -532 -473 -320 -848 -752
+                                        -1091 -1256 -133 -276 -216 -536 -273 -856 -43 -240 -52 -602 -22 -880 40
+                                        -374 177 -822 362 -1188 l53 -103 -123 -367 c-68 -202 -191 -570 -274 -818
+                                        -84 -249 -152 -459 -152 -469 0 -9 13 -22 29 -28 26 -10 29 -14 24 -45 -6 -32
+                                        -5 -34 18 -27 41 13 936 298 1314 420 198 63 368 115 378 115 9 0 52 -17 95
+                                        -39 366 -184 756 -294 1171 -332 164 -14 498 -7 659 16 954 132 1766 659 2266
+                                        1468 163 264 318 632 401 952 79 307 117 688 96 982 -54 781 -356 1473 -881
+                                        2017 -509 527 -1157 853 -1895 952 -108 14 -482 26 -600 18z m391 -684 c357
+                                        -29 650 -108 959 -259 419 -206 770 -514 1030 -906 200 -301 323 -625 371
+                                        -979 23 -168 23 -508 0 -680 -163 -1209 -1161 -2141 -2372 -2217 -427 -26
+                                        -824 44 -1212 214 -107 47 -284 143 -339 183 -17 13 -39 24 -49 24 -9 0 -222
+                                        -65 -472 -145 -250 -80 -456 -145 -457 -143 -2 2 62 197 141 433 79 237 144
+                                        442 144 458 0 16 -18 53 -44 90 -418 599 -554 1426 -351 2127 45 152 82 245
+                                        155 390 200 391 505 732 880 982 473 316 1064 472 1616 428z"/>
+                                        <path d="M5323 5236 c-23 -7 -56 -23 -75 -34 -51 -32 -199 -190 -245 -262
+                                        -147 -229 -180 -534 -92 -832 67 -225 149 -397 299 -629 190 -292 313 -450
+                                        510 -653 296 -305 545 -476 927 -635 282 -118 490 -185 607 -197 81 -8 258 20
+                                        362 58 144 52 309 168 373 262 64 96 130 313 138 457 l6 95 -31 36 c-22 24
+                                        -112 78 -294 176 -432 232 -487 254 -555 218 -17 -8 -81 -73 -141 -143 -178
+                                        -207 -215 -243 -245 -243 -38 0 -287 127 -403 205 -135 92 -223 166 -334 281
+                                        -132 137 -275 333 -355 486 l-18 36 72 79 c95 101 134 162 172 268 39 108 37
+                                        141 -20 290 -51 133 -92 243 -163 434 -58 157 -101 221 -161 240 -57 17 -287
+                                        22 -334 7z"/>
+                                    </g>
+                                </svg>
+                                <span>Iniciar Chat</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Proyectos del Cliente -->
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-semibold text-gray-700 flex items-center">
+                        Proyectos
+                        ${createBadge(clientProjects.length)}
+                    </h3>
+                    <button class="btn-primary" onclick="navigate('create_project', '${client.id}')">+ Añadir Proyecto</button>
+                </div>
+
+                <div class="card divide-y divide-gray-100">
+                    ${clientProjects.length > 0 ?
+                    clientProjects.map(p => renderProjectListItem(p, client)).join('') :
+                    '<p class="p-4 text-center text-gray-500">Este cliente aún no tiene proyectos.</p>'
+                }
+                </div>
+            `;
+        }
+
+        function renderProjectDetail(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (!project) {
+                return viewContainer.innerHTML = '<p class="p-8 text-center text-red-500">Proyecto no encontrado.</p>';
+            }
+            const client = state.clients.find(c => c.id === project.clientId);
+            if (!client) {
+                return viewContainer.innerHTML = '<p class="p-8 text-center text-red-500">Cliente del proyecto no encontrado.</p>';
+            }
+
+            const { balance, totalPaid } = calculateProjectBalance(projectId);
+            const payments = state.payments.filter(p => p.projectId === projectId).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            viewContainer.innerHTML = `
+                <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_detail', '${client.id}')">
+                    &larr; Volver al Cliente: ${client.name}
+                </button>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                    <!-- Columna Principal: Detalles y Pagos -->
+                    <div class="lg:col-span-2 space-y-6">
+
+                        <!-- Detalles del Proyecto -->
+                        <div class="card p-6">
+                            <div class="flex justify-between items-start mb-4 border-b pb-4">
+                                <h2 class="text-3xl font-bold text-gray-800">${project.name}</h2>
+                                <span class="status-badge text-lg ${getStatusClass(project.status)}">${project.status}</span>
+                            </div>
+
+<div class="mb-4">
+    <h3 class="text-xl font-semibold mb-2 text-gray-700">Cliente</h3>
+    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+        <p class="font-medium">${client.name}</p>
+        <a href="${generateWhatsAppLink(client, project)}" target="_blank"
+           class="text-sm bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 transition flex items-center space-x-1">
+           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 1280 720">
+                <path d="M6255 6844 c-540 -35 -1107 -229 -1555 -532 -473 -320 -848 -752 -1091 -1256 -133 -276 -216 -536 -273 -856 -43 -240 -52 -602 -22 -880 40 -374 177 -822 362 -1188 l53 -103 -123 -367 c-68 -202 -191 -570 -274 -818 -84 -249 -152 -459 -152 -469 0 -9 13 -22 29 -28 26 -10 29 -14 24 -45 -6 -32 -5 -34 18 -27 41 13 936 298 1314 420 198 63 368 115 378 115 9 0 52 -17 95 -39 366 -184 756 -294 1171 -332 164 -14 498 -7 659 16 954 132 1766 659 2266 1468 163 264 318 632 401 952 79 307 117 688 96 982 -54 781 -356 1473 -881 2017 -509 527 -1157 853 -1895 952 -108 14 -482 26 -600 18z m391 -684 c357 -29 650 -108 959 -259 419 -206 770 -514 1030 -906 200 -301 323 -625 371 -979 23 -168 23 -508 0 -680 -163 -1209 -1161 -2141 -2372 -2217 -427 -26 -824 44 -1212 214 -107 47 -284 143 -339 183 -17 13 -39 24 -49 24 -9 0 -222 -65 -472 -145 -250 -80 -456 -145 -457 -143 -2 2 62 197 141 433 79 237 144 442 144 458 0 16 -18 53 -44 90 -418 599 -554 1426 -351 2127 45 152 82 245 155 390 200 391 505 732 880 982 473 316 1064 472 1616 428z M5323 5236 c-23 -7 -56 -23 -75 -34 -51 -32 -199 -190 -245 -262 -147 -229 -180 -534 -92 -832 67 -225 149 -397 299 -629 190 -292 313 -450 510 -653 296 -305 545 -476 927 -635 282 -118 490 -185 607 -197 81 -8 258 20 362 58 144 52 309 168 373 262 64 96 130 313 138 457 l6 95 -31 36 c-22 24 -112 78 -294 176 -432 232 -487 254 -555 218 -17 -8 -81 -73 -141 -143 -178 -207 -215 -243 -245 -243 -38 0 -287 127 -403 205 -135 92 -223 166 -334 281 -132 137 -275 333 -355 486 l-18 36 72 79 c95 101 134 162 172 268 39 108 37 141 -20 290 -51 133 -92 243 -163 434 -58 157 -101 221 -161 240 -57 17 -287 22 -334 7z"/>
+           </svg>
+           WhatsApp
+        </a>
+    </div>
+</div>
+
+                            <p class="text-sm text-gray-500 mb-4">Creado: ${new Date(project.creationDate).toLocaleDateString('es-ES')} ${project.deliveryDate ? `| Entrega Estimada: <span class="font-medium text-blue-600">${new Date(project.deliveryDate).toLocaleDateString('es-ES')}</span>` : ''}</p>
+
+                            <h3 class="text-xl font-semibold mb-2 text-gray-700">Acuerdo y Notas</h3>
+                            <p class="text-gray-600 whitespace-pre-wrap mb-4">${project.description}</p>
+                            <button class="text-sm text-blue-600 hover:text-blue-800" onclick="openEditProjectModal('${projectId}')">Editar Descripción/Detalles</button>
+                        </div>
+
+                        <!-- Gestión de Pagos -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-700">Gestión de Pagos</h3>
+
+                            <!-- Resumen Financiero del Proyecto -->
+                            <div class="flex justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <p class="text-sm text-gray-500">Precio Total Acordado</p>
+                                    <p class="text-2xl font-bold text-gray-900">$${parseFloat(project.totalPrice).toFixed(2)}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Total Abonado</p>
+                                    <p class="text-2xl font-bold text-green-600">$${totalPaid.toFixed(2)}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Saldo Pendiente</p>
+                                    <p class="text-2xl font-bold ${balance > 0.01 ? 'text-red-600' : 'text-gray-900'}">$${balance.toFixed(2)}</p>
+                                </div>
+                            </div>
+
+                            <!-- Formulario de Abono -->
+                            <div class="flex space-x-3 mb-4">
+                                <input type="number" id="payment-amount" placeholder="Monto del Abono ($)" class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                                <button class="btn-primary" onclick="handleNewPayment('${projectId}')">Registrar Abono</button>
+                            </div>
+
+                            <!-- Historial de Pagos -->
+                            <h4 class="font-medium text-gray-700 mt-6 mb-2">Historial de Pagos</h4>
+                            <div class="divide-y divide-gray-100">
+                                ${payments.length > 0 ?
+                    payments.map(p => `
+                                        <div class="flex justify-between py-2 text-sm">
+                                            <span>Pago de <span class="font-bold">$${p.amount.toFixed(2)}</span></span>
+                                            <span class="text-gray-500">${new Date(p.date).toLocaleDateString('es-ES')}</span>
+                                        </div>
+                                    `).join('') :
+                    '<p class="text-gray-500 italic text-sm">No hay pagos registrados aún.</p>'
+                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Lateral: Estado y Miniatura -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <!-- Actualizar Estado -->
+                        <div class="card p-5">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-700">Actualizar Estado</h3>
+                            <select id="project-status" onchange="updateProjectStatus('${projectId}', this.value)" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                                ${PROJECT_STATUSES.map(s => `
+                                    <option value="${s}" ${project.status === s ? 'selected' : ''}>${s}</option>
+                                `).join('')}
+                            </select>
+                        </div>
+
+                        <!-- Miniatura de Avance -->
+                        <div class="card p-5">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-700">Imagen de Avance</h3>
+                            ${project.thumbnailBase64 ?
+                    `<img src="${project.thumbnailBase64}" alt="Miniatura del Proyecto" class="w-full h-auto rounded-lg mb-4 object-cover">` :
+                    `<div class="w-full h-32 bg-gray-100 flex items-center justify-center rounded-lg mb-4 text-gray-500 text-sm">Sin miniatura de avance</div>`
+                }
+                            <input type="file" id="thumbnail-upload" accept="image/*" onchange="handleThumbnailUpload('${projectId}')" class="text-sm w-full">
+                            ${project.thumbnailBase64 ? `<button class="text-xs text-red-500 mt-2 hover:text-red-700" onclick="removeThumbnail('${projectId}')">Eliminar Miniatura</button>` : ''}
+                        </div>
+
+                        <!-- Opciones Adicionales -->
+                        <div class="card p-5">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-700">Acciones</h3>
+                             <button class="w-full text-red-600 bg-red-100 p-2 rounded-lg hover:bg-red-200 transition font-medium" onclick="deleteProject('${projectId}')">
+                                Eliminar Proyecto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            `;
+        }
+
+        function renderCreateClientForm() {
+            viewContainer.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Paso 1: Crear Nuevo Cliente</h2>
+                <div class="card p-6 max-w-xl mx-auto">
+                    <form id="client-form" onsubmit="event.preventDefault(); handleClientCreation(true);">
+                        <div class="mb-4">
+                            <label for="client-name" class="block text-sm font-medium text-gray-700">Nombre del Cliente (Obligatorio)</label>
+                            <input type="text" id="client-name" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-4">
+                            <label for="client-whatsapp" class="block text-sm font-medium text-gray-700">Número de WhatsApp (Obligatorio)</label>
+                            <input type="text" id="client-whatsapp" required placeholder="Ej: +52 55 1234 5678" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-4">
+                            <label for="client-email" class="block text-sm font-medium text-gray-700">Correo Electrónico (Opcional)</label>
+                            <input type="email" id="client-email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-6">
+                            <label for="client-photo" class="block text-sm font-medium text-gray-700">Fotografía del Cliente (Opcional, 800x800)</label>
+                            <input type="file" id="client-photo" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Crear Cliente y Continuar al Proyecto &rarr;</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderCreateClientOnlyForm() {
+            viewContainer.innerHTML = `
+                <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_list')">
+                    &larr; Volver a Clientes
+                </button>
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Crear Nuevo Cliente</h2>
+                <div class="card p-6 max-w-xl mx-auto">
+                    <form id="client-only-form" onsubmit="event.preventDefault(); handleClientCreation(false);">
+                        <div class="mb-4">
+                            <label for="client-name-only" class="block text-sm font-medium text-gray-700">Nombre del Cliente (Obligatorio)</label>
+                            <input type="text" id="client-name-only" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-4">
+                            <label for="client-whatsapp-only" class="block text-sm font-medium text-gray-700">Número de WhatsApp (Obligatorio)</label>
+                            <input type="text" id="client-whatsapp-only" required placeholder="Ej: +52 55 1234 5678" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-4">
+                            <label for="client-email-only" class="block text-sm font-medium text-gray-700">Correo Electrónico (Opcional)</label>
+                            <input type="email" id="client-email-only" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+                        <div class="mb-6">
+                            <label for="client-photo-only" class="block text-sm font-medium text-gray-700">Fotografía del Cliente (Opcional, 800x800)</label>
+                            <input type="file" id="client-photo-only" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Crear Cliente</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderCreateProjectForm(clientId) {
+            const client = state.clients.find(c => c.id === clientId);
+
+            // Si no hay clientes en la lista global, forzamos al usuario a crear uno.
+            if (state.clients.length === 0) {
+                return navigate('create_client');
+            }
+
+            // Lista de clientes para la selección (si viene de una vista que no es de cliente)
+            const clientOptions = state.clients.map(c =>
+                `<option value="${c.id}" ${c.id === clientId ? 'selected' : ''}>${c.name}</option>`
+            ).join('');
+
+            viewContainer.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">${clientId ? 'Paso 2: Crear Proyecto' : 'Crear Nuevo Proyecto'}</h2>
+                <div class="card p-6 max-w-xl mx-auto">
+                    <form id="project-form" onsubmit="event.preventDefault(); handleProjectCreation();">
+
+                        <div class="mb-4">
+                            <label for="project-client-id" class="block text-sm font-medium text-gray-700">Asignar Cliente</label>
+                            <select id="project-client-id" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                                <option value="" disabled ${!clientId ? 'selected' : ''}>Selecciona un Cliente</option>
+                                ${clientOptions}
+                            </select>
+                            <p class="text-xs text-gray-500 mt-1">¿Cliente nuevo? Haz click en Clientes y usa el botón "+ Crear Cliente".</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="project-name" class="block text-sm font-medium text-gray-700">Nombre del Proyecto (Obligatorio)</label>
+                            <input type="text" id="project-name" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="project-price" class="block text-sm font-medium text-gray-700">Precio Total (Obligatorio)</label>
+                            <input type="number" step="0.01" min="0" id="project-price" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="project-description" class="block text-sm font-medium text-gray-700">Descripción del Acuerdo (Obligatorio)</label>
+                            <textarea id="project-description" rows="5" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]"></textarea>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="project-delivery-date" class="block text-sm font-medium text-gray-700">Fecha de Entrega (Opcional)</label>
+                            <input type="date" id="project-delivery-date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
+                        </div>
+
+                        <input type="hidden" id="project-status" value="${PROJECT_STATUSES[0]}">
+
+                        <button type="submit" class="btn-primary w-full">Crear Proyecto</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderSettings() {
+            viewContainer.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Ajustes: Mensajes de WhatsApp</h2>
+                <p class="text-gray-600 mb-6">Edita las plantillas de mensajes. Usa <code class="bg-gray-200 p-1 rounded">[NOMBRE_CLIENTE]</code>, <code class="bg-gray-200 p-1 rounded">[NOMBRE_PROYECTO]</code> y <code class="bg-gray-200 p-1 rounded">[SALDO_PENDIENTE]</code> para reemplazarlos automáticamente.</p>
+
+                <div class="card p-6 space-y-6">
+                    ${PROJECT_STATUSES.map(status => `
+                        <div class="border-b pb-4 last:border-b-0">
+                            <label for="msg-${status.replace(/\s/g, '_')}" class="block text-lg font-semibold text-gray-700 mb-2">${status}</label>
+                            <textarea id="msg-${status.replace(/\s/g, '_')}" rows="3"
+                                      class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-[#0ea5e9] focus:border-[#0ea5e9]"
+                                      onblur="saveSetting('${status}', this.value)"
+                            >${state.settings[status]}</textarea>
+                        </div>
+                    `).join('')}
+                    <p class="text-sm text-green-600 font-medium">Los cambios se guardan automáticamente al salir del campo de texto.</p>
+                </div>
+            `;
+        }
+
+
+        // ====================================================================
+        // 6. MANEJADORES DE EVENTOS
+        // ====================================================================
+
+        async function handleClientCreation(continueToProject) {
+            const formId = continueToProject ? 'client-form' : 'client-only-form';
+            const name = document.getElementById(continueToProject ? 'client-name' : 'client-name-only').value.trim();
+            const whatsapp = document.getElementById(continueToProject ? 'client-whatsapp' : 'client-whatsapp-only').value.trim();
+            const email = document.getElementById(continueToProject ? 'client-email' : 'client-email-only').value.trim();
+            const photoInput = document.getElementById(continueToProject ? 'client-photo' : 'client-photo-only');
+
+            if (!name || !whatsapp) {
+                showModal('Error de Formulario', 'Por favor, completa los campos obligatorios (Nombre y WhatsApp).');
+                return;
+            }
+
+            let photoBase64 = null;
+            if (photoInput && photoInput.files.length > 0) {
+                photoBase64 = await resizeImageAndConvertToBase64(photoInput.files[0]);
+                if (!photoBase64) {
+                    showModal('Error de Imagen', 'No se pudo procesar la imagen. Intenta con otro archivo.');
+                    return;
+                }
+            }
+
+            const clientData = {
+                name,
+                whatsapp_number: whatsapp,
+                email,
+                photoBase64
+            };
+
+            const clientId = saveClient(clientData, false); // Guardar sin navegar automáticamente
+
+            if (continueToProject) {
+                showNotification(`Cliente "${name}" creado. Continúa con el proyecto.`, 'success');
+                navigate('create_project', clientId);
+            } else {
+                showNotification(`Cliente "${name}" creado exitosamente.`, 'success');
+                navigate('client_list');
+            }
+        }
+
+        function handleProjectCreation() {
+            const clientId = document.getElementById('project-client-id').value;
+            const name = document.getElementById('project-name').value.trim();
+            const price = document.getElementById('project-price').value;
+            const description = document.getElementById('project-description').value.trim();
+            const deliveryDate = document.getElementById('project-delivery-date').value;
+            const status = document.getElementById('project-status').value;
+
+            if (!clientId || !name || !price || !description) {
+                showModal('Error de Formulario', 'Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+
+            const projectData = {
+                clientId,
+                name,
+                totalPrice: parseFloat(price).toFixed(2),
+                description,
+                status,
+                deliveryDate: deliveryDate || null,
+            };
+
+            saveProject(projectData);
+            showNotification(`Proyecto "${name}" creado.`, 'success');
+        }
+
+        function handleNewPayment(projectId) {
+            const amountInput = document.getElementById('payment-amount');
+            const amount = parseFloat(amountInput.value);
+
+            if (isNaN(amount) || amount <= 0) {
+                showModal('Error de Abono', 'Por favor, introduce un monto de abono válido y positivo.');
+                return;
+            }
+
+            addPayment(projectId, amount);
+            showNotification(`Abono de $${amount.toFixed(2)} registrado.`, 'success');
+            amountInput.value = ''; // Limpiar campo
+        }
+
+        function updateProjectStatus(projectId, newStatus) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (project) {
+                project.status = newStatus;
+                saveProject(project); // Usa saveProject para actualizar y guardar
+                showNotification(`Estado de proyecto actualizado a: ${newStatus}`, 'success');
+            }
+        }
+
+        async function handleThumbnailUpload(projectId) {
+            const fileInput = document.getElementById('thumbnail-upload');
+            const file = fileInput.files[0];
+
+            if (!file) return;
+
+            // Redimensionar y convertir a Base64 antes de guardar
+            const base64Image = await resizeImageAndConvertToBase64(file);
+
+            if (base64Image) {
+                const project = state.projects.find(p => p.id === projectId);
+                if (project) {
+                    project.thumbnailBase64 = base64Image;
+                    saveProject(project);
+                    showNotification('Miniatura cargada exitosamente.', 'success');
+                }
+            } else {
+                showModal('Error de Imagen', 'No se pudo procesar la miniatura.');
+            }
+        }
+
+        async function removeThumbnail(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (project && await showModal('Confirmar Eliminación', '¿Estás segura de que quieres eliminar la miniatura de avance?', true)) {
+                project.thumbnailBase64 = null;
+                saveProject(project);
+                showNotification('Miniatura eliminada.', 'success');
+            }
+        }
+
+
+        function openEditProjectModal(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Simulación de un modal para editar campos
+            showModal(
+                'Editar Detalles del Proyecto',
+                `
+                 <div class="mb-4">
+                    <label for="edit-name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="edit-name" value="${project.name}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                 </div>
+                 <div class="mb-4">
+                    <label for="edit-price" class="block text-sm font-medium text-gray-700">Precio Total</label>
+                    <input type="number" step="0.01" id="edit-price" value="${project.totalPrice}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                 </div>
+                 <div class="mb-4">
+                    <label for="edit-description" class="block text-sm font-medium text-gray-700">Descripción/Notas</label>
+                    <textarea id="edit-description" rows="5" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">${project.description}</textarea>
+                 </div>
+                 <div class="mb-4">
+                    <label for="edit-delivery-date" class="block text-sm font-medium text-gray-700">Fecha de Entrega</label>
+                    <input type="date" id="edit-delivery-date" value="${project.deliveryDate ? project.deliveryDate.substring(0, 10) : ''}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                 </div>
+                 `,
+                'Guardar', 'Cancelar' // Etiquetas personalizadas para el modal
+            ).then(confirmed => {
+                if (confirmed) {
+                    const newName = document.getElementById('edit-name').value;
+                    const newPrice = document.getElementById('edit-price').value;
+                    const newDescription = document.getElementById('edit-description').value;
+                    const newDeliveryDate = document.getElementById('edit-delivery-date').value || null;
+
+                    if (!newName || !newPrice || !newDescription) {
+                        showModal('Error de Edición', 'Nombre, Precio y Descripción son obligatorios.');
+                        return;
+                    }
+
+                    project.name = newName;
+                    project.totalPrice = parseFloat(newPrice).toFixed(2);
+                    project.description = newDescription;
+                    project.deliveryDate = newDeliveryDate;
+
+                    saveProject(project);
+                    showNotification('Proyecto actualizado.', 'success');
+                }
+            });
+        }
+
+
+        async function deleteProject(projectId) {
+            const project = state.projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            if (await showModal('Confirmar Eliminación', `¿Estás segura de eliminar el proyecto "${project.name}"? Esta acción no se puede deshacer.`, true)) {
+                // Eliminar proyecto
+                state.projects = state.projects.filter(p => p.id !== projectId);
+                // Eliminar pagos asociados
+                state.payments = state.payments.filter(p => p.projectId !== projectId);
+
+                saveData();
+                showNotification('Proyecto eliminado.', 'success');
+                navigate('client_detail', project.clientId); // Volver al detalle del cliente
+            }
+        }
+
+        async function deleteClient(clientId) {
+            const client = state.clients.find(c => c.id === clientId);
+            if (!client) return;
+
+            if (await showModal('Confirmar Eliminación', `¿Estás segura de eliminar al cliente "${client.name}" y TODOS sus proyectos asociados? Esta acción no se puede deshacer.`, true)) {
+                // Proyectos a eliminar
+                const projectsToDelete = state.projects.filter(p => p.clientId === clientId);
+                const projectIdsToDelete = projectsToDelete.map(p => p.id);
+
+                // Eliminar pagos
+                state.payments = state.payments.filter(p => !projectIdsToDelete.includes(p.projectId));
+                // Eliminar proyectos
+                state.projects = state.projects.filter(p => p.clientId !== clientId);
+                // Eliminar cliente
+                state.clients = state.clients.filter(c => c.id !== clientId);
+
+                saveData();
+                showNotification('Cliente y proyectos eliminados.', 'success');
+                navigate('client_list'); // Volver a la lista de clientes
+            }
+        }
+
+
+        function saveSetting(status, message) {
+            state.settings[status] = message;
+            saveData();
+        }
+
+        function handleSearch(event) {
+            state.searchTerm = event.target.value;
+
+            // Si estamos en la lista de clientes, forzamos la actualización de esa vista para filtrar.
+            if (state.currentView === 'client_list') {
+                renderClientList();
+            } else if (state.currentView === 'dashboard') {
+                // Si estamos en el dashboard, la búsqueda debe influir en los resultados de la lista general
+                renderDashboard();
+            }
+        }
+
+
+        /**
+         * Función principal de renderizado (Router).
+         */
+        function renderApp() {
+            console.log(`Renderizando vista: ${state.currentView}`);
+            switch (state.currentView) {
+                case 'dashboard':
+                    renderDashboard();
+                    break;
+                case 'client_list':
+                    renderClientList();
+                    break;
+                case 'client_detail':
+                    renderClientDetail(state.currentClientId);
+                    break;
+                case 'project_detail':
+                    renderProjectDetail(state.currentProjectId);
+                    break;
+                case 'create_client':
+                    renderCreateClientOnlyForm();
+                    break;
+                case 'create_project':
+                    renderCreateProjectForm(state.currentClientId);
+                    break;
+                case 'settings':
+                    renderSettings();
+                    break;
+                default:
+                    renderDashboard();
+            }
+        }
+
+        // ====================================================================
+        // 7. INICIALIZACIÓN
+        // ====================================================================
+        window.onload = () => {
+            loadData();
+            // Aseguramos que los estilos de navegación se apliquen en la carga inicial
+            updateActiveClass(state.currentView);
+            renderApp();
+        };
+
+    </script>
+</body>
+
+</html>

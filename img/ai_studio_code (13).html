@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acuarela CRM - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://via.placeholder.com/40x40" alt="Logo Acuarela CRM" class="logo">
+                <span class="app-name">Acuarela CRM</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Clientes</a></li>
+                    <li><a href="#"><i class="fas fa-project-diagram"></i> Proyectos</a></li>
+                    <li><a href="#"><i class="fas fa-money-bill-wave"></i> Pagos</a></li>
+                    <li><a href="#"><i class="fas fa-sticky-note"></i> Notas</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Ajustes</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar por cliente, proyecto, WhatsApp...">
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/30x30" alt="User Avatar" class="avatar">
+                </div>
+            </header>
+
+            <section class="dashboard-overview">
+                <div class="card total-income">
+                    <h3>Ingreso Total</h3>
+                    <p>$12,500</p>
+                </div>
+                <div class="card pending-payments">
+                    <h3>Pagos Pendientes</h3>
+                    <p>7</p>
+                </div>
+                <div class="card upcoming-deliveries">
+                    <h3>Próximas Entregas</h3>
+                    <p>3 <small>(Hoy/Mañana)</small></p>
+                </div>
+            </section>
+
+            <section class="dashboard-projects">
+                <div class="projects-list active-projects">
+                    <h2>Trabajos Activos</h2>
+                    <!-- Aquí se cargarán los proyectos activos -->
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/50x50" alt="Project Thumbnail" class="project-thumbnail">
+                        <div class="project-info">
+                            <h4>Branding "Café del Sol"</h4>
+                            <span>Cliente: Ana Gómez</span>
+                            <span class="project-status in-progress">En Proceso</span>
+                        </div>
+                        <div class="project-actions">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/50x50" alt="Project Thumbnail" class="project-thumbnail">
+                        <div class="project-info">
+                            <h4>Website "Deco Hogar"</h4>
+                            <span>Cliente: Ana Gómez</span>
+                            <span class="project-status pending-payment">Pendiente de Pago</span>
+                        </div>
+                        <div class="project-actions">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </div>
+                     <div class="project-item">
+                        <img src="https://via.placeholder.com/50x50" alt="Project Thumbnail" class="project-thumbnail">
+                        <div class="project-info">
+                            <h4>Logotipo "Florería Edén"</h4>
+                            <span>Cliente: Ana Gómez</span>
+                            <span class="project-status to-deliver">Por Entregar</span>
+                        </div>
+                        <div class="project-actions">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projects-list previous-projects">
+                    <h2>Trabajos Anteriores</h2>
+                    <!-- Aquí se cargarán los proyectos anteriores -->
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/50x50" alt="Project Thumbnail" class="project-thumbnail">
+                        <div class="project-info">
+                            <h4>Carteles "Teatro"</h4>
+                            <span>Cliente: Rest. Fuego</span>
+                            <span class="project-status delivered">Entregado</span>
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <img src="https://via.placeholder.com/50x50" alt="Project Thumbnail" class="project-thumbnail">
+                        <div class="project-info">
+                            <h4>Menú "Maqrlez"</h4>
+                            <span>Cliente: Rest. Fuego</span>
+                            <span class="project-status cancelled">Cancelado</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-payments-summary">
+                <h2>Pagos Pendientes (Resumen)</h2>
+                <!-- Aquí se cargarán los resúmenes de pagos pendientes -->
+                <div class="payment-summary-item">
+                    <span>Ana Márzilez</span>
+                    <span>-$300</span>
+                    <span>$550</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="fab">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
