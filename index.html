@@ -6,30 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acuarela CRM</title>
 
-<link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
-<link rel="icon" type="imageicon/png" sizes="192x192"  href="icon/android-icon-192x192.png">
-<link rel="icon" type="imageicon/png" sizes="32x32" href="icon/favicon-32x32.png">
-<link rel="icon" type="imageicon/png" sizes="96x96" href="icon/favicon-96x96.png">
-<link rel="icon" type="imageicon/png" sizes="16x16" href="icon/favicon-16x16.png">
-<link rel="manifest" href="icon/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-
-
-    <!-- Carga de Tailwind CSS -->
+    <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
+    <link rel="icon" type="imageicon/png" sizes="192x192" href="icon/android-icon-192x192.png">
+    <link rel="icon" type="imageicon/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="imageicon/png" sizes="96x96" href="icon/favicon-96x96.png">
+    <link rel="icon" type="imageicon/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración para usar la fuente Inter y un esquema de color pastel -->
+        <!-- Open Graph (OG) Tags para Facebook, WhatsApp, etc. -->
+    <meta property="og:title" content="Acuarela Design Studio CRM - Gestión de Proyectos" />
+
+    <!-- Descripción corta debajo del título -->
+    <meta property="og:description"
+        content="Herramienta interna de gestión de clientes (CRM), proyectos, pagos y comunicación, diseñada para la estética Acuarela." />
+
+    <!-- URL canónica de tu proyecto (Reemplazar con el dominio real si lo publicas) -->
+    <meta property="og:url" content="[URL_REAL_DE_TU_APP]" />
+
+    <!-- Imagen que se mostrará en la vista previa (Usaremos un placeholder, idealmente deberías usar el logo de Acuarela en 1200x630) -->
+    <meta property="og:image"
+        content="https://placehold.co/1200x630/0ea5e9/ffffff?text=Acuarela+CRM" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Acuarela Design Studio CRM" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="[DOMINIO_REAL_DE_TU_APP]" /> 
+    <meta name="twitter:url" content="[URL_REAL_DE_TU_APP]" />
+    <meta name="twitter:title" content="Acuarela Design Studio CRM - Gestión de Proyectos" />
+    <meta name="twitter:description"
+        content="Herramienta interna para Acuarela Design Studio. Gestiona proyectos, clientes y saldos pendientes de forma eficiente." />
+    <meta name="twitter:image"
+        content="https://placehold.co/1200x630/0ea5e9/ffffff?text=Acuarela+CRM" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
@@ -37,11 +65,10 @@
             /* Fondo muy claro y suave */
         }
 
-        /* Estilos personalizados para la estética Acuarela (bordes suaves) */
+        /* Estilos base del CRM */
         .card {
             background-color: white;
             border-radius: 12px;
-            /*box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);*/
             transition: transform 0.1s ease-in-out;
         }
 
@@ -78,9 +105,7 @@
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-           /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
             color: #1f2937;
-            /* Dark gray for text */
             font-weight: 600;
         }
 
@@ -90,40 +115,31 @@
             background-position: center;
         }
 
-        /* Simula tono verde claro */
         .wc-orange {
             background: url('img/verde-acuarela.png');
             background-size: cover;
             background-position: center;
         }
 
-        /* Simula tono naranja claro */
         .wc-blue {
             background: url('img/melon-acuarela.png');
             background-size: cover;
             background-position: center;
         }
 
-        /* Simula tono azul claro */
         .wc-value {
             font-size: 2.25rem;
-            /* text-4xl */
             font-weight: 800;
-            /* font-extrabold */
             margin-top: 4px;
         }
 
         .wc-title {
             font-size: 0.875rem;
-            /* text-sm */
             font-weight: 700;
-            /* font-bold */
             letter-spacing: 0.05em;
-            /* tracking-wider */
             text-transform: uppercase;
         }
 
-        /* Estilo para la badge del título - color pastel */
         .title-badge {
             display: inline-flex;
             align-items: center;
@@ -133,42 +149,269 @@
             font-size: 0.75rem;
             font-weight: 700;
             background-color: #f3f4f6;
-            /* Gris pastel muy claro */
             color: #4b5563;
-            /* Texto gris oscuro */
         }
-        
+
         /* Estilos para la tabla de clientes */
         .client-grid {
             display: grid;
-            /* 10fr (Nombre/Avatar) | 2fr (Activos) | 3fr (Deuda) | 2fr (Acciones) */
             grid-template-columns: minmax(200px, 10fr) 2fr 3fr 2fr;
             align-items: center;
             padding: 0.75rem 1rem;
             border-bottom: 1px solid #f3f4f6;
         }
-        
+
         .client-grid-header {
             font-weight: 600;
             color: #4b5563;
             background-color: #f9fafb;
             border-radius: 8px 8px 0 0;
         }
-        
+
         @media (max-width: 1023px) {
-            /* En móvil, hacemos una columna más simple y visible */
             .client-grid {
-                grid-template-columns: 1fr; /* Columna única */
+                grid-template-columns: 1fr;
                 gap: 0.5rem;
                 padding: 1rem;
             }
+
             .client-grid-header {
-                display: none; /* Ocultamos la cabecera de la tabla en móvil */
+                display: none;
             }
-            .client-info-group {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+        }
+
+        /* === ESTILOS DE LA PLANTILLA ADADW.HTML INTEGRADOS === */
+        /* Contenedor del avatar en vista de detalle (Grande) */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4px;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        /* Contenedor interno del avatar en vista de detalle (Grande) */
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            overflow: hidden;
+            /* Para las imágenes de Base64 */
+        }
+
+        .avatar-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .btn-secondary-custom {
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #0ea5e9;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .metric-card {
+            padding: 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea30;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card .icon-bg {
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        /* Badges de Estado del Cliente */
+        .badge-success-client {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-inactive-client {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Estilos de Pestañas de Proyectos */
+        .nav-link-project {
+            padding: 10px 16px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            color: #6b7280;
+            outline: none;
+        }
+
+        .nav-link-project.active {
+            font-weight: 600;
+            color: #0ea5e9;
+            border-bottom-color: #0ea5e9;
+        }
+
+        /* Estilos de Tarjeta de Proyecto */
+        .project-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-content-detail {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .project-image-detail {
+            width: 120px;
+            height: 120px;
+            min-width: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #e5e7eb;
+        }
+
+        .project-details-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .project-details-row span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        /* Badges de Estado del Proyecto */
+        .badge-project-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .status-Pendiente_de_inicio {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Azul pastel - Info */
+        .status-En_proceso {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Amarillo pastel - Proceso */
+        .status-Pendiente_de_pago {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        /* Rosa pastel - Alerta */
+        .status-Por_entregar {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+
+        /* Azul claro - Listo */
+        .status-Entregado {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Verde pastel - Éxito */
+        .status-Cancelado {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+
+        /* Gris - Cancelado */
+
+        /* Media Queries para responsividad */
+        @media (max-width: 767px) {
+            .avatar-container {
+                width: 90px;
+                height: 90px;
+            }
+
+            .avatar-inner {
+                font-size: 2.5rem;
+            }
+
+            .project-image-detail {
+                width: 90px;
+                min-width: 90px;
+                height: 90px;
+            }
+
+            .project-content-detail {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .project-details-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-whatsapp,
+            .btn-secondary-custom {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -176,33 +419,25 @@
 
 <body class="min-h-screen">
 
-    <!-- Contenedor Principal de la Aplicación (Flex para Sidebar + Contenido) -->
     <div class="flex min-h-screen bg-[#f7f9fb]">
 
-        <!-- 1. Barra Lateral (Sidebar) -->
-        <!-- Usamos 'hidden' por defecto en móvil, 'lg:flex' para mostrar en desktop -->
         <aside id="sidebar"
             class="w-64 fixed top-0 left-0 h-full bg-white shadow-xl z-50 p-4 flex-col transition-transform transform -translate-x-full lg:flex lg:translate-x-0">
 
-            <!-- Botón para cerrar el menú en móvil -->
             <button class="absolute top-4 right-4 lg:hidden text-gray-500 hover:text-gray-800"
                 onclick="toggleSidebar()">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
 
-            <!-- Logo y Nombre de Marca -->
             <div class="py-4 mb-6 border-b border-gray-100 flex items-center">
-                <!-- Imagen Placeholder para Logo Acuarela -->
                 <img src="img/311449776_615059936938111_2931967811620169613_n.jpg" alt="Logo Acuarela"
                     class="rounded-lg mr-2">
-                <!--<h2 class="text-2xl font-extrabold text-gray-800">CRM</h2> -->
             </div>
 
-            <!-- Navegación Principal -->
             <nav id="main-navigation" class="space-y-2 flex-grow">
-                <!-- Dashboard -->
                 <button id="nav-dashboard"
                     class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
                     onclick="navigate('dashboard')">
@@ -214,7 +449,6 @@
                     </svg>
                     <span>Dashboard</span>
                 </button>
-                <!-- Clientes -->
                 <button id="nav-client_list"
                     class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
                     onclick="navigate('client_list')">
@@ -226,7 +460,6 @@
                     </svg>
                     <span>Clientes</span>
                 </button>
-                <!-- Ajustes -->
                 <button id="nav-settings"
                     class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
                     onclick="navigate('settings')">
@@ -242,7 +475,6 @@
                 </button>
             </nav>
 
-            <!-- Botón de Acción Rápida (Abajo) -->
             <div class="mt-auto pt-4 border-t border-gray-100">
                 <button class="btn-primary w-full flex items-center justify-center space-x-2"
                     onclick="checkForClientsBeforeProject()">
@@ -256,41 +488,43 @@
             </div>
         </aside>
 
-        <!-- Overlay para móvil cuando el menú está abierto -->
         <div id="sidebar-overlay" class="fixed inset-0 bg-black opacity-50 z-40 hidden lg:hidden"
             onclick="toggleSidebar()"></div>
 
 
-        <!-- 2. Área Principal de Contenido (Offset para pantallas grandes) -->
         <div id="main-content-wrapper" class="flex-grow lg:ml-64 flex flex-col w-full">
 
-            <!-- Botón de menú (solo visible en móvil) -->
-            <button class="fixed top-4 left-4 z-30 lg:hidden p-2 bg-white rounded-lg shadow-md"
+            <button class="fixed top-2 left-4 z-30 lg:hidden p-2 bg-white rounded-lg shadow-md"
                 onclick="toggleSidebar()">
                 <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
                 </svg>
             </button>
 
-            <!-- Header/Hero Section (con imagen de fondo) -->
-            <!-- Añadimos padding-left en móvil para que no choque con el botón de menú -->
-            <header id="main-header" class="w-full h-32 bg-cover bg-center shadow-md relative lg:pl-0 pl-16"
+            <header id="main-header"
+                class="w-full h-20 bg-cover bg-center relative lg:pl-0 pl-16 flex items-center justify-between px-6"
                 style="background-image: url('img/header.png');">
-                <div class=" inset-0 bg-black opacity-30 rounded-b-lg"></div>
-                <div class="p-6 relative z-10 text-white flex flex-col justify-end h-full">
-                    <h1 class="text-4xl font-bold">Panel de Gestión</h1>
-                    <p class="text-sm">Bienvenida de vuelta, dueña de Acuarela.</p>
+
+                <div class="relative z-10 text-white font-bold text-2xl hidden md:block">
+                    Acuarela CRM
                 </div>
+
+                <div id="header-content" class="relative z-10 text-white flex-1 flex justify-center items-center">
+                </div>
+
+                <div class="relative z-10 ml-4">
+                    <img src="https://placehold.co/40x40/77c3e7/ffffff?text=U" alt="Usuario"
+                        class="w-10 h-10 rounded-full border-2 border-white object-cover">
+                </div>
+
             </header>
 
-            <!-- Contenedor del Contenido Principal -->
             <main class="flex-grow w-full p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
-                <!-- Este div será el punto de montaje de todas las vistas -->
                 <div id="view-container">
                     <div class="text-center p-20 text-gray-500">Cargando aplicación...</div>
                 </div>
 
-                <!-- Modal Base (Oculto por defecto) -->
                 <div id="modal-container"
                     class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
                     <div class="card p-6 w-full max-w-sm">
@@ -307,7 +541,6 @@
         </div>
     </div>
 
-    <!-- Script de la Aplicación (Lógica y Datos) -->
     <script>
         // ====================================================================
         // 1. ESTRUCTURA DE DATOS Y UTILIDADES DE ALMACENAMIENTO (localStorage)
@@ -461,14 +694,20 @@
          */
         function calculateProjectBalance(projectId) {
             const project = state.projects.find(p => p.id === projectId);
-            if (!project) return { totalPaid: 0, balance: 0 };
+            if (!project) return {
+                totalPaid: 0,
+                balance: 0
+            };
 
             const totalPaid = state.payments
                 .filter(p => p.projectId === projectId)
                 .reduce((sum, payment) => sum + parseFloat(payment.amount), 0);
 
             const balance = parseFloat(project.totalPrice) - totalPaid;
-            return { totalPaid: parseFloat(totalPaid.toFixed(2)), balance: parseFloat(balance.toFixed(2)) };
+            return {
+                totalPaid: parseFloat(totalPaid.toFixed(2)),
+                balance: parseFloat(balance.toFixed(2))
+            };
         }
 
         /**
@@ -488,18 +727,25 @@
         /**
          * Genera el HTML para el avatar del cliente (foto o inicial).
          * @param {Object} client Objeto cliente.
+         * @param {string} size - Clases de Tailwind para width y height (ej: 'w-10 h-10', 'w-full h-full').
          * @returns {string} HTML del avatar.
          */
-        const getClientAvatarHtml = (client) => {
+        const getClientAvatarHtml = (client, size = 'w-10 h-10') => {
+            const initial = client.name.charAt(0).toUpperCase();
+            const color = generatePastelColor(client.name);
+            const classes = size.includes('120px') ? '' : 'shadow-md'; // Solo sombra si es el pequeño
+
             if (client.photoBase64) {
-                // Si tiene foto, la mostramos
-                return `<img src="${client.photoBase64}" alt="${client.name.charAt(0)} Avatar" class="w-10 h-10 object-cover rounded-full">`;
+                // Si tiene foto, la mostramos dentro de un div con las clases de tamaño
+                return `
+                    <div class="${size} rounded-full overflow-hidden flex-shrink-0 ${classes}">
+                        <img src="${client.photoBase64}" alt="${initial} Avatar" class="w-full h-full object-cover">
+                    </div>
+                `;
             } else {
                 // Si no tiene foto, mostramos la inicial con color pastel
-                const initial = client.name.charAt(0).toUpperCase();
-                const color = generatePastelColor(client.name);
                 return `
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg text-white shadow-md" 
+                    <div class="${size} rounded-full flex items-center justify-center font-bold text-lg text-white flex-shrink-0 ${classes}" 
                          style="background-color: ${color};">
                         ${initial}
                     </div>
@@ -557,11 +803,16 @@
          * @param {object} project - Objeto proyecto (opcional).
          * @returns {string} URL de WhatsApp.
          */
-        function generateWhatsAppLink(client, project) {
+        function generateWhatsAppLink(client, project = null) {
             const status = project ? project.status : null;
+            // Si hay proyecto, usa el mensaje de estado, sino usa un saludo genérico
             const messageTemplate = status ? state.settings[status] : 'Hola [NOMBRE_CLIENTE], te escribo desde Acuarela Design Studio.';
 
-            const { balance } = project ? calculateProjectBalance(project.id) : { balance: 0 };
+            const {
+                balance
+            } = project ? calculateProjectBalance(project.id) : {
+                balance: 0
+            };
             const formattedBalance = `$${balance.toFixed(2)}`;
 
             const message = messageTemplate
@@ -572,7 +823,6 @@
             // Sanitizar el número de teléfono (solo dígitos)
             const number = client.whatsapp_number.replace(/[^0-9]/g, '');
 
-            // Usamos un número predefinido si no hay número, para no romper el link
             const safeNumber = number.length >= 10 ? number : '5215512345678'; // Ejemplo MX
             const encodedMessage = encodeURIComponent(message);
             return `https://wa.me/${safeNumber}?text=${encodedMessage}`;
@@ -584,7 +834,6 @@
          * @returns {string} HTML de la badge.
          */
         const createBadge = (count) => {
-            // Utilizamos un color pastel neutro para la badge
             return `<span class="title-badge bg-gray-200 text-gray-700">${count}</span>`;
         };
 
@@ -597,12 +846,19 @@
          */
         function saveClient(clientData, navigateToDetail = true) {
             if (!clientData.id) {
+                // Nuevo cliente: inicializar campos
                 clientData.id = crypto.randomUUID();
+                clientData.creationDate = new Date().toISOString(); // NUEVO: Fecha de creación
+                clientData.isActive = true; // NUEVO: Activo por defecto
                 state.clients.push(clientData);
             } else {
                 const index = state.clients.findIndex(c => c.id === clientData.id);
                 if (index !== -1) {
-                    state.clients[index] = { ...state.clients[index], ...clientData };
+                    // Actualizar cliente existente
+                    state.clients[index] = {
+                        ...state.clients[index],
+                        ...clientData
+                    };
                 }
             }
             saveData();
@@ -624,7 +880,6 @@
             } else {
                 const index = state.projects.findIndex(p => p.id === projectData.id);
                 if (index !== -1) {
-                    // Solo actualiza los campos permitidos y la fecha de última actualización
                     state.projects[index] = {
                         ...state.projects[index],
                         ...projectData,
@@ -648,7 +903,6 @@
             };
             state.payments.push(payment);
             saveData();
-            // Refresca la vista de proyecto
             const project = state.projects.find(p => p.id === projectId);
             if (project) {
                 navigate('project_detail', project.clientId, projectId);
@@ -666,7 +920,6 @@
             return new Promise(resolve => {
                 const container = document.getElementById('modal-container');
                 document.getElementById('modal-title').innerHTML = title;
-                // *** CORRECCIÓN CRÍTICA: Usamos innerHTML para renderizar HTML del formulario ***
                 document.getElementById('modal-message').innerHTML = message;
 
                 const cancelBtn = document.getElementById('modal-cancel-btn');
@@ -693,7 +946,6 @@
          * Muestra una notificación temporal.
          */
         function showNotification(message, type = 'success') {
-            const container = document.getElementById('app');
             let bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
             let notification = document.createElement('div');
             notification.className = `fixed top-16 right-4 p-3 rounded-lg text-white font-semibold shadow-xl ${bgColor} z-50 transition-opacity duration-300`;
@@ -711,44 +963,138 @@
          * Mapea el estado a colores de Tailwind.
          */
         function getStatusClass(status) {
-            switch (status) {
-                case 'Pendiente de inicio': return 'bg-gray-200 text-gray-700';
-                case 'En proceso': return 'bg-blue-200 text-blue-700';
-                case 'Pendiente de pago': return 'bg-yellow-200 text-yellow-700 font-bold';
-                case 'Por entregar': return 'bg-purple-200 text-purple-700';
-                case 'Entregado': return 'bg-green-200 text-green-700';
-                case 'Cancelado': return 'bg-red-200 text-red-700';
-                default: return 'bg-gray-100 text-gray-500';
-            }
+            const cleanStatus = status.replace(/\s/g, '_');
+            return `badge-project-status status-${cleanStatus}`;
         }
 
+        // INICIO CORRECCIÓN DE ESTILOS Y UNIFICACIÓN DE TARJETA
         /**
-         * Renderiza una fila de proyecto simple para listas.
+         * Renderiza una tarjeta de proyecto (unificada para Dashboard y Detalle de Cliente).
+         * @param {Object} project - Objeto proyecto con sus cálculos de balance.
+         * @param {Object} client - Objeto cliente asociado.
+         * @returns {string} HTML de la tarjeta del proyecto.
          */
-        function renderProjectListItem(project, client) {
-            const { balance, totalPaid } = calculateProjectBalance(project.id);
-            const isFullyPaid = balance <= 0.01;
-            const balanceText = balance > 0.01 ? `<span class="text-red-600 font-bold">$${balance.toFixed(2)} Pendiente</span>` : `<span class="text-green-600 font-bold">Saldo Pagado</span>`;
+        function renderProjectCard(project, client) {
+            const {
+                balance,
+                totalPaid
+            } = calculateProjectBalance(project.id);
+            const total = parseFloat(project.totalPrice).toFixed(2);
+            const paid = totalPaid.toFixed(2);
+            const statusClass = getStatusClass(project.status);
+            const initialPrice = parseFloat(project.totalPrice);
+            const percentPaid = initialPrice > 0 ? (totalPaid / initialPrice) * 100 : 100;
+
+            const imageSrc = project.thumbnailBase64 || `https://placehold.co/120x120/E5E7EB/4B5563?text=${project.name.charAt(0).toUpperCase()}`;
 
             return `
-                <div class="p-4 border-b last:border-b-0 hover:bg-gray-50 transition cursor-pointer flex justify-between items-center"
-                     onclick="navigate('project_detail', '${project.clientId}', '${project.id}')">
-                    <div>
-                        <p class="text-lg font-semibold text-gray-800">${project.name}</p>
-                        <p class="text-sm text-gray-500">Cliente: ${client.name}</p>
-                        <p class="text-sm text-gray-500">Total: $${parseFloat(project.totalPrice).toFixed(2)} | Abonado: $${totalPaid.toFixed(2)}</p>
-                    </div>
-                    <div class="flex flex-col items-end space-y-2">
-                         <span class="status-badge ${getStatusClass(project.status)}">${project.status}</span>
-                         <p class="text-sm">${balanceText}</p>
-                         ${project.deliveryDate ? `<p class="text-xs text-blue-600">Entrega: ${new Date(project.deliveryDate).toLocaleDateString('es-ES')}</p>` : ''}
-                    </div>
-                </div>
+                <a href="#" onclick="event.preventDefault(); navigate('project_detail', '${project.clientId}', '${project.id}')" class="project-card-link" aria-label="Ver detalles del proyecto ${project.name}">
+                    <article class="card p-4 transition-all duration-300 hover:shadow-lg">
+                        <div class="project-content-detail">
+                            <img src="${imageSrc}" alt="Vista previa del proyecto ${project.name}" class="project-image-detail">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                    <h3 class="text-lg font-bold text-gray-900 leading-tight">${project.name} (${client.name})</h3>
+                                    <span class="${statusClass}">
+                                        <i class="fas fa-circle w-3 h-3 text-xs"></i>
+                                        ${project.status}
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-3 text-sm">
+                                    ${project.description.substring(0, 100)}...
+                                </p>
+                                <div class="project-details-row">
+                                    <span class="flex items-center gap-1 text-gray-500">
+                                        <i class="fas fa-calendar-alt w-4 h-4 text-gray-400"></i>
+                                        Entrega: <strong>${project.deliveryDate ? new Date(project.deliveryDate).toLocaleDateString('es-ES') : 'N/A'}</strong>
+                                    </span>
+                                    
+                                    <span class="flex items-center gap-1 ${balance > 0.01 ? 'text-red-600' : 'text-green-600'}">
+                                        <i class="fas fa-dollar-sign w-4 h-4" aria-hidden="true"></i>
+                                        Pago: <strong>$${paid} / $${total}</strong>
+                                    </span>
+                                    <span class="text-sm ${balance > 0.01 ? 'text-red-600 font-bold' : 'text-green-600 font-bold'}">
+                                        ${balance > 0.01 ? `$${balance.toFixed(2)} Pendiente` : `Saldo Pagado`}
+                                    </span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1 mt-2">
+                                    <div class="h-1 rounded-full ${balance > 0.01 ? 'bg-red-400' : 'bg-green-500'}" style="width: ${percentPaid.toFixed(0)}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </a>
             `;
         }
 
+
+        /**
+         * Función para renderizar el contenido de las pestañas de proyecto (Ahora usa renderProjectCard).
+         * @param {string} clientId - ID del cliente.
+         * @param {string} filterType - Tipo de filtro ('all', 'active', 'completed').
+         * @param {Array<Object>} [all=null] - Lista de proyectos completa (cache opcional).
+         * @param {Array<Object>} [active=null] - Lista de proyectos activos (cache opcional).
+         * @param {Array<Object>} [completed=null] - Lista de proyectos completados (cache opcional).
+         */
+        function renderProjectTabContent(clientId, filterType, all = null, active = null, completed = null) {
+            const client = state.clients.find(c => c.id === clientId);
+
+            const projects = all || state.projects.filter(p => p.clientId === clientId).map(p => ({
+                ...p,
+                ...calculateProjectBalance(p.id)
+            }));
+            const activeProjects = active || projects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado');
+            const completedProjects = completed || projects.filter(p => p.status === 'Entregado' || p.status === 'Cancelado');
+
+            let filteredList = [];
+            let emptyMessage = '';
+
+            switch (filterType) {
+                case 'active':
+                    filteredList = activeProjects;
+                    emptyMessage = 'No hay proyectos activos en este momento.';
+                    break;
+                case 'completed':
+                    filteredList = completedProjects;
+                    emptyMessage = 'No hay proyectos completados o cancelados.';
+                    break;
+                case 'all':
+                default:
+                    filteredList = projects;
+                    emptyMessage = 'Este cliente no tiene proyectos registrados.';
+                    break;
+            }
+
+            if (filteredList.length === 0) {
+                return `<p class="text-center text-gray-500 py-8">${emptyMessage}</p>`;
+            }
+
+            return filteredList.map(project => renderProjectCard(project, client)).join('');
+        }
+
+        function switchProjectTab(clientId, filterType) {
+            // 1. Actualizar estilos de pestaña
+            document.querySelectorAll('.nav-link-project').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+
+            const activeTabId = `tab-${filterType}`;
+            const activeTab = document.getElementById(activeTabId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+                activeTab.setAttribute('aria-selected', 'true');
+            }
+
+            // 2. Renderizar contenido
+            const contentDiv = document.getElementById('tab-content');
+            contentDiv.innerHTML = renderProjectTabContent(clientId, filterType);
+        }
+        // FIN CORRECCIÓN DE ESTILOS Y UNIFICACIÓN DE TARJETA
+
         // ====================================================================
         // 5. RENDERING DE VISTAS ESPECÍFICAS
+        // (REORGANIZADAS PARA EVITAR ReferenceError)
         // ====================================================================
 
         function renderDashboard() {
@@ -756,7 +1102,7 @@
                 ...p,
                 client: state.clients.find(c => c.id === p.clientId),
                 ...calculateProjectBalance(p.id)
-            }));
+            })).filter(p => p.client); // Filtra proyectos sin cliente (solo si hay inconsistencia)
 
             const activeProjects = allProjects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado');
             const pastProjects = allProjects.filter(p => p.status === 'Entregado' || p.status === 'Cancelado');
@@ -787,23 +1133,19 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h2>
                 
                 ${hasProjects ? `
-                    <!-- Resumen Financiero Estilo Acuarela -->
                     <div class="card p-4 mb-8">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <!-- Ingresos Acumulados (Verde) -->
                             <div class="watercolor-card wc-green">
                                 <p class="wc-title">Ingreso Total</p>
                                 <p class="wc-value">$${totalIncome.toFixed(2)}</p>
                             </div>
 
-                            <!-- Pagos Pendientes (Naranja) -->
                             <div class="watercolor-card wc-orange">
                                 <p class="wc-title">Pagos Pendientes</p>
                                 <p class="wc-value">${pendingPaymentProjects.length}</p>
                                 <p class="text-sm mt-1 font-semibold text-gray-600">$${totalPendingIncome.toFixed(2)}</p>
                             </div>
 
-                            <!-- Trabajos Activos / Próximas Entregas (Azul) -->
                             <div class="watercolor-card wc-blue">
                                 <p class="wc-title">Próximas Entregas</p>
                                 <p class="wc-value">${imminentDeadlines.length}</p>
@@ -812,9 +1154,7 @@
                         </div>
                     </div>
 
-                    <!-- Alertas y Próximas Fechas (Contenido anterior) -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                        <!-- Pagos Pendientes -->
                         <div class="card p-5">
                             <h3 class="text-xl font-semibold mb-4 text-red-600 flex items-center">
                                 Trabajos con Pagos Pendientes
@@ -831,7 +1171,6 @@
                     }
                         </div>
 
-                        <!-- Próximos Recordatorios de Entrega -->
                         <div class="card p-5">
                             <h3 class="text-xl font-semibold mb-4 text-blue-600 flex items-center">
                                 Próximas Fechas de Entrega
@@ -849,27 +1188,25 @@
                         </div>
                     </div>
 
-                    <!-- Trabajos Activos -->
                     <div class="card p-5 mb-6">
                         <h3 class="text-2xl font-semibold mb-4 text-gray-700 flex items-center">
                             Trabajos Activos
                             ${createBadge(activeProjects.length)}
                         </h3>
-                        <div class="divide-y divide-gray-100">
-                            ${activeProjects.map(p => renderProjectListItem(p, p.client)).join('')}
-                            ${activeProjects.length === 0 ? '<p class="text-gray-500 p-4">No hay proyectos activos.</p>' : ''}
+                        <div class="space-y-4">
+                            ${activeProjects.map(p => renderProjectCard(p, p.client)).join('')}
+                            ${activeProjects.length === 0 ? '<p class="text-gray-500 p-4 text-center">No hay proyectos activos.</p>' : ''}
                         </div>
                     </div>
 
-                    <!-- Trabajos Anteriores -->
                     <div class="card p-5">
                         <h3 class="text-2xl font-semibold mb-4 text-gray-700 flex items-center">
                             Trabajos Anteriores
                             ${createBadge(pastProjects.length)}
                         </h3>
-                        <div class="divide-y divide-gray-100">
-                            ${pastProjects.map(p => renderProjectListItem(p, p.client)).join('')}
-                            ${pastProjects.length === 0 ? '<p class="text-gray-500 p-4">No hay proyectos finalizados o cancelados.</p>' : ''}
+                        <div class="space-y-4">
+                            ${pastProjects.map(p => renderProjectCard(p, p.client)).join('')}
+                            ${pastProjects.length === 0 ? '<p class="text-gray-500 p-4 text-center">No hay proyectos finalizados o cancelados.</p>' : ''}
                         </div>
                     </div>
                 ` : `
@@ -894,24 +1231,45 @@
                 ...calculateProjectBalance(p.id)
             }));
 
-            // Combina clientes con sus proyectos para el resumen
             const clientsWithSummary = state.clients.map(client => {
                 const clientProjects = allProjects.filter(p => p.clientId === client.id);
                 const activeCount = clientProjects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado').length;
                 const totalBalance = clientProjects.reduce((sum, p) => sum + p.balance, 0);
 
-                return { ...client, activeCount, totalBalance };
+                return {
+                    ...client,
+                    activeCount,
+                    totalBalance
+                };
             });
 
-            // Lógica de Búsqueda y Ordenamiento
             const term = state.searchTerm.toLowerCase();
             const filteredClients = clientsWithSummary.filter(c => {
                 if (!term) return true;
                 return c.name.toLowerCase().includes(term) || c.whatsapp_number.includes(term);
             });
 
-            // Cabecera con Búsqueda
-            const headerHtml = `
+            // La cabecera (título, búsqueda y botón) se maneja en updateHeaderContent()
+
+            if (state.clients.length === 0) {
+                viewContainer.innerHTML = `
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Clientes</h2>
+                    <div class="card p-10 text-center bg-gray-50">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2a3 3 0 015.356-1.857M7 20h4m-4 0v-2c0-.656-.126-1.283-.356-1.857M7 20H4a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <h3 class="mt-2 text-xl font-bold text-gray-900">Lista de Clientes Vacía</h3>
+                        <p class="mt-1 text-gray-600">Aún no has registrado ningún cliente. Usa el botón "Crear Cliente (Solo)" arriba.</p>
+                        <div class="mt-4">
+                             <button onclick="navigate('create_client')" class="btn-primary">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>+ Crear Cliente (Solo)</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            viewContainer.innerHTML = `
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold text-gray-800 flex items-center">
                         Clientes
@@ -925,35 +1283,15 @@
                          <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
                 </div>
-            `;
 
-            if (state.clients.length === 0) {
-                viewContainer.innerHTML = headerHtml + `
-                    <div class="card p-10 text-center bg-gray-50">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2a3 3 0 015.356-1.857M7 20h4m-4 0v-2c0-.656-.126-1.283-.356-1.857M7 20H4a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <h3 class="mt-2 text-xl font-bold text-gray-900">Lista de Clientes Vacía</h3>
-                        <p class="mt-1 text-gray-600">Aún no has registrado ningún cliente. Empieza con el botón de "Nuevo Proyecto" o con el botón "+ Crear Cliente".</p>
-                        <div class="mt-4">
-                             <button onclick="navigate('create_client')" class="btn-primary">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>+ Crear Cliente</span>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-
-            viewContainer.innerHTML = headerHtml + `
                 <div class="card divide-y divide-gray-100">
                     <div class="flex justify-end p-4">
                         <button onclick="navigate('create_client')" class="btn-primary text-sm p-2 flex items-center space-x-1">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>Crear Cliente</span>
+                            <span>+ Crear Cliente (Solo)</span>
                         </button>
                     </div>
                     
-                    <!-- Encabezados de la tabla (solo en desktop) -->
                     <div class="client-grid client-grid-header hidden lg:grid">
                         <div class="text-left">Cliente / Contacto</div>
                         <div class="text-center">Activos</div>
@@ -964,33 +1302,28 @@
                     ${filteredClients.map(client => `
                         <div class="client-grid hover:bg-gray-50 transition">
                             
-                            <!-- Columna 1: Cliente/Contacto (click para detalle) -->
                             <div class="flex items-center space-x-4 cursor-pointer" onclick="navigate('client_detail', '${client.id}')">
-                                ${getClientAvatarHtml(client)}
+                                ${getClientAvatarHtml(client, 'w-10 h-10')}
                                 <div>
                                     <p class="font-semibold text-gray-800">${client.name}</p>
                                     <p class="text-xs text-gray-500">${client.whatsapp_number}</p>
                                 </div>
                             </div>
                             
-                            <!-- Columna 2: Trabajos Activos -->
                             <div class="text-center text-sm font-semibold">
                                 <span class="${client.activeCount > 0 ? 'text-blue-600' : 'text-gray-500'}">
                                     ${client.activeCount}
                                 </span>
                             </div>
                             
-                            <!-- Columna 3: Saldo Pendiente -->
                             <div class="text-right text-sm font-semibold">
                                 <span class="${client.totalBalance > 0.01 ? 'text-red-600' : 'text-green-600'}">
                                     $${client.totalBalance.toFixed(2)}
                                 </span>
                             </div>
 
-                            <!-- Columna 4: Acciones Rápidas -->
                             <div class="flex justify-center space-x-2">
                                 
-                                <!-- Botón WhatsApp (Solo Icono) -->
                                 <a href="${generateWhatsAppLink(client)}" target="_blank" title="Enviar WhatsApp"
                                    onclick="event.stopPropagation();" 
                                    class="p-2 rounded-full text-green-600 hover:bg-green-100 transition">
@@ -999,7 +1332,6 @@
                                    </svg>
                                 </a>
 
-                                <!-- Botón Nuevo Proyecto (Solo Icono) -->
                                 <button title="Crear Nuevo Proyecto" 
                                         onclick="event.stopPropagation(); navigate('create_project', '${client.id}')"
                                         class="p-2 rounded-full text-blue-600 hover:bg-blue-100 transition">
@@ -1022,84 +1354,163 @@
                 return viewContainer.innerHTML = '<p class="p-8 text-center text-red-500">Cliente no encontrado.</p>';
             }
 
-            const clientProjects = state.projects
+            const allProjects = state.projects
                 .filter(p => p.clientId === clientId)
                 .map(p => ({
                     ...p,
                     ...calculateProjectBalance(p.id)
                 }));
 
+            // CÁLCULOS
+            const activeProjects = allProjects.filter(p => p.status !== 'Entregado' && p.status !== 'Cancelado');
+            const completedProjects = allProjects.filter(p => p.status === 'Entregado' || p.status === 'Cancelado');
+            const totalBalance = allProjects.reduce((sum, p) => sum + p.balance, 0);
+            const totalFacturado = allProjects.reduce((sum, p) => sum + p.totalPaid, 0);
+            const totalProyectos = allProjects.length;
+            const creationDate = client.creationDate ? new Date(client.creationDate).toLocaleDateString('es-ES', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            }) : 'N/A';
+            const clientActiveStatus = client.isActive ? 'Activo' : 'Inactivo';
+            const clientBadgeClass = client.isActive ? 'badge-success-client' : 'badge-inactive-client';
+            const clientIcon = client.isActive ? 'fas fa-check-circle' : 'fas fa-times-circle';
+
+
+            // Renderiza la vista principal con la nueva estructura
             viewContainer.innerHTML = `
-                <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_list')">
-                    &larr; Volver a Clientes
-                </button>
-                <div class="card p-6 mb-6">
-                    <div class="flex justify-between items-start mb-4 pb-4">
-                        <div class="flex items-center space-x-4">
-                             ${getClientAvatarHtml(client)}
-                             <h2 class="text-3xl font-bold text-gray-800">${client.name}</h2>
+                <div class="max-w-7xl mx-auto fade-in">
+                    
+                    <nav class="mb-6" aria-label="Breadcrumb">
+                        <button class="text-gray-600 hover:text-gray-900 flex items-center gap-2 group transition-colors" onclick="navigate('client_list')" aria-label="Volver a lista de clientes">
+                            <i class="fas fa-arrow-left w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+                            <span class="font-medium">Volver a Clientes</span>
+                        </button>
+                    </nav>
+
+                    <div class="card p-6 md:p-8 mb-6">
+                        <div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                            
+                            <div class="flex flex-col md:flex-row gap-6 items-start md:items-center flex-1">
+                                <div class="avatar-container" role="img" aria-label="Avatar de ${client.name}">
+                                    <div class="avatar-inner">
+                                        ${getClientAvatarHtml(client, 'w-full h-full')}
+                                    </div>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <h1 class="text-3xl md:text-4xl font-bold text-gray-900">${client.name}</h1>
+                                        <span class="${clientBadgeClass}" role="status" aria-label="Cliente ${clientActiveStatus}">
+                                            <i class="${clientIcon} w-4 h-4"></i>
+                                            ${clientActiveStatus}
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="space-y-2">
+                                        <div class="flex items-center gap-3 text-gray-700">
+                                            <i class="fab fa-whatsapp w-5 h-5 text-gray-400" aria-hidden="true"></i>
+                                            <span class="font-medium">${client.whatsapp_number}</span>
+                                        </div>
+                                        
+                                        ${client.email ? `
+                                            <div class="flex items-center gap-3 text-gray-700">
+                                                <i class="fas fa-envelope w-5 h-5 text-gray-400" aria-hidden="true"></i>
+                                                <a href="mailto:${client.email}" class="hover:text-purple-600 font-medium transition-colors">${client.email}</a>
+                                            </div>
+                                        ` : ''}
+                                        
+                                        <div class="flex items-center gap-3 text-gray-600">
+                                            <i class="fas fa-calendar-alt w-5 h-5 text-gray-400" aria-hidden="true"></i>
+                                            <span>Cliente desde: <strong>${creationDate}</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col gap-3 w-full md:w-auto">
+                                
+                                <button onclick="openEditClientModal('${client.id}')" class="btn-secondary-custom w-full" aria-label="Editar información del cliente">
+                                    <i class="fas fa-edit w-5 h-5"></i>
+                                    <span>Editar Cliente</span>
+                                </button>
+                                
+                                <a href="${generateWhatsAppLink(client)}" target="_blank" class="btn btn-whatsapp w-full" aria-label="Iniciar conversación en WhatsApp">
+                                    <i class="fab fa-whatsapp w-5 h-5" aria-hidden="true"></i>
+                                    Iniciar Chat
+                                </a>
+                                
+                                <button onclick="deleteClient('${client.id}')" class="btn-secondary-custom w-full text-red-600 border-red-300 hover:bg-red-50" aria-label="Eliminar cliente">
+                                    <i class="fas fa-trash-alt w-5 h-5"></i>
+                                    Eliminar Cliente
+                                </button>
+                            </div>
                         </div>
-                        <button class="text-sm text-gray-500 hover:text-red-500" onclick="deleteClient('${client.id}')">
-                            Eliminar Cliente
-                         </button>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <p class="text-lg font-medium text-gray-700">Contacto:</p>
-                            <p class="text-gray-600">WhatsApp: ${client.whatsapp_number}</p>
-                            <p class="text-gray-600">Email: ${client.email || 'N/A'}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        
+                        <div class="metric-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="icon-bg bg-blue-100">
+                                    <i class="fas fa-folder-open w-6 h-6 text-blue-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Proyectos Activos</p>
+                            <p class="text-3xl font-bold text-gray-900">${activeProjects.length}</p>
                         </div>
-                        <div class="flex items-center justify-end">
-                            <a href="https://wa.me/${client.whatsapp_number.replace(/[^0-9]/g, '')}" target="_blank"
-                               class="btn-primary flex items-center space-x-2">
-                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet">
-                                    <g transform="translate(0,720) scale(0.1,-0.1)">
-                                        <path d="M6255 6844 c-540 -35 -1107 -229 -1555 -532 -473 -320 -848 -752
-                                        -1091 -1256 -133 -276 -216 -536 -273 -856 -43 -240 -52 -602 -22 -880 40
-                                        -374 177 -822 362 -1188 l53 -103 -123 -367 c-68 -202 -191 -570 -274 -818
-                                        -84 -249 -152 -459 -152 -469 0 -9 13 -22 29 -28 26 -10 29 -14 24 -45 -6 -32
-                                        -5 -34 18 -27 41 13 936 298 1314 420 198 63 368 115 378 115 9 0 52 -17 95
-                                        -39 366 -184 756 -294 1171 -332 164 -14 498 -7 659 16 954 132 1766 659 2266
-                                        1468 163 264 318 632 401 952 79 307 117 688 96 982 -54 781 -356 1473 -881
-                                        2017 -509 527 -1157 853 -1895 952 -108 14 -482 26 -600 18z m391 -684 c357
-                                        -29 650 -108 959 -259 419 -206 770 -514 1030 -906 200 -301 323 -625 371
-                                        -979 23 -168 23 -508 0 -680 -163 -1209 -1161 -2141 -2372 -2217 -427 -26
-                                        -824 44 -1212 214 -107 47 -284 143 -339 183 -17 13 -39 24 -49 24 -9 0 -222
-                                        -65 -472 -145 -250 -80 -456 -145 -457 -143 -2 2 62 197 141 433 79 237 144
-                                        442 144 458 0 16 -18 53 -44 90 -418 599 -554 1426 -351 2127 45 152 82 245
-                                        155 390 200 391 505 732 880 982 473 316 1064 472 1616 428z"/>
-                                        <path d="M5323 5236 c-23 -7 -56 -23 -75 -34 -51 -32 -199 -190 -245 -262
-                                        -147 -229 -180 -534 -92 -832 67 -225 149 -397 299 -629 190 -292 313 -450
-                                        510 -653 296 -305 545 -476 927 -635 282 -118 490 -185 607 -197 81 -8 258 20
-                                        362 58 144 52 309 168 373 262 64 96 130 313 138 457 l6 95 -31 36 c-22 24
-                                        -112 78 -294 176 -432 232 -487 254 -555 218 -17 -8 -81 -73 -141 -143 -178
-                                        -207 -215 -243 -245 -243 -38 0 -287 127 -403 205 -135 92 -223 166 -334 281
-                                        -132 137 -275 333 -355 486 l-18 36 72 79 c95 101 134 162 172 268 39 108 37
-                                        141 -20 290 -51 133 -92 243 -163 434 -58 157 -101 221 -161 240 -57 17 -287
-                                        22 -334 7z"/>
-                                    </g>
-                                </svg>
-                                <span>Iniciar Chat</span>
-                            </a>
+                        
+                        <div class="metric-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="icon-bg bg-yellow-100">
+                                    <i class="fas fa-money-bill-wave w-6 h-6 text-yellow-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Saldo Pendiente</p>
+                            <p class="text-3xl font-bold ${totalBalance > 0.01 ? 'text-red-600' : 'text-green-600'}">$${totalBalance.toFixed(2)}</p>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="icon-bg bg-green-100">
+                                    <i class="fas fa-check-circle w-6 h-6 text-green-600"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-gray-600 mb-1">Total Facturado</p>
+                            <p class="text-3xl font-bold text-green-600">$${totalFacturado.toFixed(2)}</p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Lista de Proyectos del Cliente -->
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-2xl font-semibold text-gray-700 flex items-center">
-                        Proyectos
-                        ${createBadge(clientProjects.length)}
-                    </h3>
-                    <button class="btn-primary" onclick="navigate('create_project', '${client.id}')">+ Añadir Proyecto</button>
-                </div>
+                    <div class="card p-6 md:p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                                Proyectos
+                                <span class="badge badge-info title-badge bg-blue-200 text-blue-800" role="status">${totalProyectos}</span>
+                            </h2>
+                            
+                            <button onclick="navigate('create_project', '${client.id}')" class="btn btn-primary p-2 md:p-3" aria-label="Crear nuevo proyecto para este cliente">
+                                <i class="fas fa-plus w-5 h-5"></i>
+                                <span class="hidden md:inline">Nuevo Proyecto</span>
+                            </button>
+                        </div>
+                        
+                        <div role="tablist" aria-label="Filtrar proyectos" class="flex flex-wrap gap-4 mb-6 border-b border-gray-200">
+                            <button id="tab-all" aria-selected="true" aria-controls="proyectos-todos" class="nav-link-project active" onclick="switchProjectTab('${client.id}', 'all')">
+                                Todos (${totalProyectos})
+                            </button>
+                            <button id="tab-active" aria-selected="false" aria-controls="proyectos-activos" class="nav-link-project" onclick="switchProjectTab('${client.id}', 'active')">
+                                Activos (${activeProjects.length})
+                            </button>
+                            <button id="tab-completed" aria-selected="false" aria-controls="proyectos-completados" class="nav-link-project" onclick="switchProjectTab('${client.id}', 'completed')">
+                                Completados (${completedProjects.length})
+                            </button>
+                        </div>
+                        
+                        <div id="tab-content" class="space-y-4">
+                            ${renderProjectTabContent(client.id, 'all', allProjects, activeProjects, completedProjects)}
+                        </div>
 
-                <div class="card divide-y divide-gray-100">
-                    ${clientProjects.length > 0 ?
-                    clientProjects.map(p => renderProjectListItem(p, client)).join('') :
-                    '<p class="p-4 text-center text-gray-500">Este cliente aún no tiene proyectos.</p>'
-                }
+                    </div>
                 </div>
             `;
         }
@@ -1114,7 +1525,10 @@
                 return viewContainer.innerHTML = '<p class="p-8 text-center text-red-500">Cliente del proyecto no encontrado.</p>';
             }
 
-            const { balance, totalPaid } = calculateProjectBalance(projectId);
+            const {
+                balance,
+                totalPaid
+            } = calculateProjectBalance(projectId);
             const payments = state.payments.filter(p => p.projectId === projectId).sort((a, b) => new Date(b.date) - new Date(a.date));
 
             viewContainer.innerHTML = `
@@ -1123,10 +1537,8 @@
                 </button>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                    <!-- Columna Principal: Detalles y Pagos -->
                     <div class="lg:col-span-2 space-y-6">
 
-                        <!-- Detalles del Proyecto -->
                         <div class="card p-6">
                             <div class="flex justify-between items-start mb-4 border-b pb-4">
                                 <h2 class="text-3xl font-bold text-gray-800">${project.name}</h2>
@@ -1154,11 +1566,9 @@
                             <button class="text-sm text-blue-600 hover:text-blue-800" onclick="openEditProjectModal('${projectId}')">Editar Descripción/Detalles</button>
                         </div>
 
-                        <!-- Gestión de Pagos -->
                         <div class="card p-6">
                             <h3 class="text-xl font-semibold mb-4 text-gray-700">Gestión de Pagos</h3>
 
-                            <!-- Resumen Financiero del Proyecto -->
                             <div class="flex justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg">
                                 <div>
                                     <p class="text-sm text-gray-500">Precio Total Acordado</p>
@@ -1174,13 +1584,11 @@
                                 </div>
                             </div>
 
-                            <!-- Formulario de Abono -->
                             <div class="flex space-x-3 mb-4">
                                 <input type="number" id="payment-amount" placeholder="Monto del Abono ($)" class="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
                                 <button class="btn-primary" onclick="handleNewPayment('${projectId}')">Registrar Abono</button>
                             </div>
 
-                            <!-- Historial de Pagos -->
                             <h4 class="font-medium text-gray-700 mt-6 mb-2">Historial de Pagos</h4>
                             <div class="divide-y divide-gray-100">
                                 ${payments.length > 0 ?
@@ -1196,9 +1604,7 @@
                         </div>
                     </div>
 
-                    <!-- Columna Lateral: Estado y Miniatura -->
                     <div class="lg:col-span-1 space-y-6">
-                        <!-- Actualizar Estado -->
                         <div class="card p-5">
                             <h3 class="text-xl font-semibold mb-3 text-gray-700">Actualizar Estado</h3>
                             <select id="project-status" onchange="updateProjectStatus('${projectId}', this.value)" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-[#0ea5e9] focus:border-[#0ea5e9]">
@@ -1208,7 +1614,6 @@
                             </select>
                         </div>
 
-                        <!-- Miniatura de Avance -->
                         <div class="card p-5">
                             <h3 class="text-xl font-semibold mb-3 text-gray-700">Imagen de Avance</h3>
                             ${project.thumbnailBase64 ?
@@ -1219,7 +1624,6 @@
                             ${project.thumbnailBase64 ? `<button class="text-xs text-red-500 mt-2 hover:text-red-700" onclick="removeThumbnail('${projectId}')">Eliminar Miniatura</button>` : ''}
                         </div>
 
-                        <!-- Opciones Adicionales -->
                         <div class="card p-5">
                             <h3 class="text-xl font-semibold mb-3 text-gray-700">Acciones</h3>
                              <button class="w-full text-red-600 bg-red-100 p-2 rounded-lg hover:bg-red-200 transition font-medium" onclick="deleteProject('${projectId}')">
@@ -1234,7 +1638,10 @@
 
         function renderCreateClientForm() {
             viewContainer.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">Paso 1: Crear Nuevo Cliente</h2>
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">Paso 1: Crear Nuevo Cliente</h2>
+                    <p class="text-gray-500">Completa los datos del cliente para empezar el proyecto.</p>
+                </div>
                 <div class="card p-6 max-w-xl mx-auto">
                     <form id="client-form" onsubmit="event.preventDefault(); handleClientCreation(true);">
                         <div class="mb-4">
@@ -1264,7 +1671,10 @@
                 <button class="text-[#0ea5e9] mb-4 flex items-center hover:underline" onclick="navigate('client_list')">
                     &larr; Volver a Clientes
                 </button>
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">Crear Nuevo Cliente</h2>
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">Crear Nuevo Cliente (Solo)</h2>
+                    <p class="text-gray-500">Registra un cliente sin iniciar un proyecto de inmediato.</p>
+                </div>
                 <div class="card p-6 max-w-xl mx-auto">
                     <form id="client-only-form" onsubmit="event.preventDefault(); handleClientCreation(false);">
                         <div class="mb-4">
@@ -1303,7 +1713,10 @@
             ).join('');
 
             viewContainer.innerHTML = `
-                <h2 class="text-3xl font-bold text-gray-800 mb-6">${clientId ? 'Paso 2: Crear Proyecto' : 'Crear Nuevo Proyecto'}</h2>
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800">${clientId ? 'Paso 2: Crear Proyecto' : 'Crear Nuevo Proyecto'}</h2>
+                    <p class="text-gray-500">Define los detalles del nuevo trabajo.</p>
+                </div>
                 <div class="card p-6 max-w-xl mx-auto">
                     <form id="project-form" onsubmit="event.preventDefault(); handleProjectCreation();">
 
@@ -1313,7 +1726,7 @@
                                 <option value="" disabled ${!clientId ? 'selected' : ''}>Selecciona un Cliente</option>
                                 ${clientOptions}
                             </select>
-                            <p class="text-xs text-gray-500 mt-1">¿Cliente nuevo? Haz click en Clientes y usa el botón "+ Crear Cliente".</p>
+                            <p class="text-xs text-gray-500 mt-1">¿Cliente nuevo? Haz click en Clientes y usa el botón "+ Crear Cliente (Solo)".</p>
                         </div>
 
                         <div class="mb-4">
@@ -1370,7 +1783,6 @@
         // ====================================================================
 
         async function handleClientCreation(continueToProject) {
-            const formId = continueToProject ? 'client-form' : 'client-only-form';
             const name = document.getElementById(continueToProject ? 'client-name' : 'client-name-only').value.trim();
             const whatsapp = document.getElementById(continueToProject ? 'client-whatsapp' : 'client-whatsapp-only').value.trim();
             const email = document.getElementById(continueToProject ? 'client-email' : 'client-email-only').value.trim();
@@ -1397,7 +1809,7 @@
                 photoBase64
             };
 
-            const clientId = saveClient(clientData, false); // Guardar sin navegar automáticamente
+            const clientId = saveClient(clientData, false);
 
             if (continueToProject) {
                 showNotification(`Cliente "${name}" creado. Continúa con el proyecto.`, 'success');
@@ -1485,6 +1897,59 @@
                 saveProject(project);
                 showNotification('Miniatura eliminada.', 'success');
             }
+        }
+
+        /**
+         * Abre el modal de edición del cliente.
+         */
+        async function openEditClientModal(clientId) {
+            const client = state.clients.find(c => c.id === clientId);
+            if (!client) return;
+
+            const content = `
+                <form id="edit-client-form">
+                    <div class="mb-4">
+                        <label for="edit-name" class="block text-sm font-medium text-gray-700">Nombre (Obligatorio)</label>
+                        <input type="text" id="edit-name" value="${client.name}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="edit-whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp (Obligatorio)</label>
+                        <input type="text" id="edit-whatsapp" value="${client.whatsapp_number}" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4">
+                        <label for="edit-email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                        <input type="email" id="edit-email" value="${client.email || ''}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    </div>
+                    <div class="mb-4 flex items-center">
+                        <input type="checkbox" id="edit-is-active" ${client.isActive ? 'checked' : ''} class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="edit-is-active" class="ml-2 block text-sm font-medium text-gray-700">Cliente Activo (Aparece en Dashboard)</label>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">La foto de perfil solo se puede actualizar creando un nuevo cliente por ahora.</p>
+                </form>
+            `;
+
+            showModal('Editar Cliente: ' + client.name, content, true).then(confirmed => {
+                if (confirmed) {
+                    const newName = document.getElementById('edit-name').value.trim();
+                    const newWhatsapp = document.getElementById('edit-whatsapp').value.trim();
+                    const newEmail = document.getElementById('edit-email').value.trim();
+                    const newIsActive = document.getElementById('edit-is-active').checked;
+
+                    if (!newName || !newWhatsapp) {
+                        showModal('Error de Edición', 'Nombre y WhatsApp son obligatorios.');
+                        return;
+                    }
+
+                    saveClient({
+                        id: clientId,
+                        name: newName,
+                        whatsapp_number: newWhatsapp,
+                        email: newEmail,
+                        isActive: newIsActive
+                    });
+                    showNotification('Cliente actualizado.', 'success');
+                }
+            });
         }
 
 
@@ -1585,11 +2050,9 @@
         function handleSearch(event) {
             state.searchTerm = event.target.value;
 
-            // Si estamos en la lista de clientes, forzamos la actualización de esa vista para filtrar.
             if (state.currentView === 'client_list') {
                 renderClientList();
             } else if (state.currentView === 'dashboard') {
-                // Si estamos en el dashboard, la búsqueda debe influir en los resultados de la lista general
                 renderDashboard();
             }
         }
@@ -1636,6 +2099,9 @@
             updateActiveClass(state.currentView);
             renderApp();
         };
+
+        // Función auxiliar para inicializar la pestaña (se llama al cargar client_detail)
+        window.switchProjectTab = switchProjectTab;
 
     </script>
 </body>
