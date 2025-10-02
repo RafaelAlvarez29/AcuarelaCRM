@@ -279,7 +279,7 @@
             width: 120px;
             height: 120px;
             min-width: 120px;
-            border-radius: 1.5rem;
+            border-radius: 8px;
             object-fit: cover;
             flex-shrink: 0;
             background-color: #e5e7eb;
@@ -1258,11 +1258,11 @@
                 </div>
 
                 <div class="overflow-x-auto card border border-gray-200/80">
-                    <table class="w-full text-left">
+                    <table class="w-full text-left min-w-[600px] md:min-w-full">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="p-4 font-semibold text-gray-600">Contacto</th>
-                                <th class="p-4 font-semibold text-gray-600">Métricas Operativas</th>
+                                <th class="p-4 font-semibold text-gray-600 hidden md:table-cell">Métricas Operativas</th>
                                 <th class="p-4 font-semibold text-gray-600">Acciones</th>
                             </tr>
                         </thead>
@@ -1281,7 +1281,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="p-4 align-top">
+                                        <td class="p-4 align-top hidden md:table-cell">
                                             <p class="font-medium text-gray-800">${client.activeCount} Trabajo${client.activeCount !== 1 ? 's' : ''} Activo${client.activeCount !== 1 ? 's' : ''}</p>
                                             <p class="text-sm ${client.totalBalance > 0.01 ? 'text-red-600' : 'text-gray-500'}">
                                                 Saldo Pendiente: $${client.totalBalance.toFixed(2)}
@@ -1292,12 +1292,12 @@
                                                 <a href="${generateWhatsAppLink(client)}" target="_blank" onclick="event.stopPropagation();"
                                                    class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium bg-green-100 text-green-700 hover:bg-green-200 transition">
                                                     <i class="fab fa-whatsapp text-base"></i>
-                                                    <span>WhatsApp</span>
+                                                    <span class="hidden md:inline">WhatsApp</span>
                                                 </a>
                                                 <button onclick="event.stopPropagation(); navigate('create_project', '${client.id}')"
                                                         class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium bg-gray-200/60 hover:bg-gray-200 transition">
                                                     <i class="fas fa-plus-circle text-base"></i>
-                                                    <span>Proyecto</span>
+                                                    <span class="hidden md:inline">Proyecto</span>
                                                 </button>
                                             </div>
                                         </td>
