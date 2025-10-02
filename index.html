@@ -380,6 +380,12 @@
                 width: 100%;
                 justify-content: center;
             }
+            .wc-value {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-top: 4px;
+            color
+        }
         }
     </style>
 </head>
@@ -1101,7 +1107,7 @@
                 
                 ${hasProjects ? `
                     <div class="card p-4 mb-8">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-3 md:grid-cols-3 gap-4">
                             <div class="watercolor-card wc-green">
                                 <p class="wc-title">Ingreso Total</p>
                                 <p class="wc-value">$${totalIncome.toFixed(2)}</p>
