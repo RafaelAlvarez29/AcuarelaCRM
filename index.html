@@ -66,7 +66,7 @@
         }
 
         .btn-primary {
-            background-color: #0ea5e9;
+            background-color: #ebacc3;
             /* Sky-500 (Azul Acuarela) */
             color: white;
             padding: 8px 16px;
@@ -76,7 +76,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #0284c7;
+            background-color: #f59fc2;
             /* Sky-600 */
         }
 
@@ -88,9 +88,9 @@
         }
 
         .nav-link-active {
-            background-color: #ebf8ff;
-            /* Lightest blue */
-            color: #0ea5e9;
+            background-color: #ffebfb;
+            /* Lightest rose */
+            color: #f59fc2;
         }
 
         /* Estilos AÑADIDOS para las tarjetas de Dashboard al estilo Acuarela */
@@ -256,8 +256,8 @@
 
         .nav-link-project.active {
             font-weight: 600;
-            color: #0ea5e9;
-            border-bottom-color: #0ea5e9;
+            color: #f59fc2;
+            border-bottom-color: #ebacc3;
         }
 
         /* Estilos de Tarjeta de Proyecto */
@@ -437,7 +437,7 @@
 
             <nav id="main-navigation" class="space-y-2 flex-grow">
                 <button id="nav-dashboard"
-                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
                     onclick="navigate('dashboard')">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -448,7 +448,7 @@
                     <span>Dashboard</span>
                 </button>
                 <button id="nav-client_list"
-                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
                     onclick="navigate('client_list')">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -459,7 +459,7 @@
                     <span>Clientes</span>
                 </button>
                 <button id="nav-settings"
-                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ebf8ff] hover:text-[#0ea5e9] transition"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
                     onclick="navigate('settings')">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -622,13 +622,13 @@
         function updateActiveClass(view) {
             document.querySelectorAll('.nav-link').forEach(btn => {
                 btn.classList.remove('nav-link-active');
-                btn.classList.remove('text-[#0ea5e9]');
+                btn.classList.remove('text-[#f59fc2]');
                 btn.classList.add('text-gray-600');
             });
             const activeBtn = document.getElementById(`nav-${view}`);
             if (activeBtn) {
                 activeBtn.classList.add('nav-link-active');
-                activeBtn.classList.add('text-[#0ea5e9]');
+                activeBtn.classList.add('text-[#f59fc2]');
                 activeBtn.classList.remove('text-gray-600');
             }
         }
@@ -1208,7 +1208,7 @@
                     </div>
                 ` : `
                     <div class="card p-10 text-center bg-blue-50">
-                        <svg class="mx-auto h-12 w-12 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <svg class="mx-auto h-12 w-12 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         <h3 class="mt-2 text-xl font-bold text-gray-900">¡Bienvenida a Acuarela CRM!</h3>
                         <p class="mt-1 text-gray-600">Tu panel está listo. Comienza creando tu primer cliente y proyecto para ver el resumen de tus finanzas y trabajos.</p>
                         <div class="mt-6">
