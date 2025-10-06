@@ -431,8 +431,7 @@
             </button>
 
             <div class="py-4 mb-6 border-b border-gray-100 flex items-center">
-                <img src="icon/acuarela-cr.webp" alt="Logo Acuarela"
-                    class="rounded-lg mr-2">
+                <img src="icon/acuarela-cr.webp" alt="Logo Acuarela" class="rounded-lg mr-2">
             </div>
 
             <nav id="main-navigation" class="space-y-2 flex-grow">
@@ -448,16 +447,11 @@
                     <span>Dashboard</span>
                 </button>
                 <button id="nav-client_list"
-                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
-                    onclick="navigate('client_list')">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2a3 3 0 015.356-1.857M7 20h4m-4 0v-2c0-.656-.126-1.283-.356-1.857M7 20H4a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                        </path>
-                    </svg>
-                    <span>Clientes</span>
-                </button>
+    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
+    onclick="navigate('client_list')">
+    <i class="fas fa-users w-5 h-5"></i>
+    <span>Clientes</span>
+</button>
                 <button id="nav-settings"
                     class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
                     onclick="navigate('settings')">
@@ -470,6 +464,17 @@
                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                     <span>Ajustes</span>
+                </button>
+                <button id="nav-data"
+                    class="nav-link w-full text-left p-3 rounded-lg text-gray-600 font-medium flex items-center space-x-3 hover:bg-[#ffebfb] hover:text-[#f59fc2] transition"
+                    onclick="navigate('data')">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                        </path>
+                    </svg>
+                    <span>Datos</span>
                 </button>
             </nav>
 
@@ -494,7 +499,7 @@
 
             <button class="fixed top-2 left-4 z-30 lg:hidden p-2 bg-white rounded-lg shadow-md" style="margin: 8px;"
                 onclick="toggleSidebar()">
-                <svg class="w-6 h-6 text-gray-700"  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>
                 </svg>
@@ -505,7 +510,7 @@
                 style="background-image: url('img/header.png');">
 
                 <div class="relative z-10 text-white font-bold text-2xl hidden md:block" style="padding-left: 20px;">
-                    <img src="icon/ACUARELA LOGO3.svg" alt="" style="width: 150px;"> 
+                    <img src="icon/ACUARELA LOGO3.svg" alt="" style="width: 150px;">
                 </div>
 
                 <div id="header-content" class="relative z-10 text-white flex-1 flex justify-center items-center">
@@ -914,7 +919,7 @@
         const viewContainer = document.getElementById('view-container');
 
         /** Muestra el modal de forma síncrona. */
-        function showModal(title, message, isConfirm = false) {
+        function showModal(title, message, isConfirm = false, actionText = 'Aceptar', cancelText = 'Cancelar') {
             return new Promise(resolve => {
                 const container = document.getElementById('modal-container');
                 document.getElementById('modal-title').innerHTML = title;
@@ -924,6 +929,9 @@
                 const actionBtn = document.getElementById('modal-action-btn');
 
                 cancelBtn.classList.toggle('hidden', !isConfirm);
+                actionBtn.textContent = actionText;
+                cancelBtn.textContent = cancelText;
+
 
                 actionBtn.onclick = () => {
                     container.classList.add('hidden');
@@ -1230,7 +1238,7 @@
             `;
         }
 
-        // ====================== MODIFIED FUNCTION START ======================
+        // ====================== CIENT LIST RENDER (NO CHANGES) ======================
         function renderClientList() {
             const allProjects = state.projects.map(p => ({
                 ...p,
@@ -1348,7 +1356,8 @@
                 </div>
             `;
         }
-        // ====================== MODIFIED FUNCTION END ========================
+        // ====================== END CIENT LIST RENDER ======================
+
 
         function renderClientDetail(clientId) {
             const client = state.clients.find(c => c.id === clientId);
@@ -1693,7 +1702,7 @@
                         </div>
                         <div class="mb-6">
                             <label for="client-photo-only" class="block text-sm font-medium text-gray-700">Fotografía del Cliente (Opcional, 800x800)</label>
-                            <input type="file" id="client-photo-only" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            <input type="file" id="client-photo-only" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                         </div>
                         <button type="submit" class="btn-primary w-full">Crear Cliente</button>
                     </form>
@@ -1778,6 +1787,62 @@
                 </div>
             `;
         }
+
+        // ====================== NUEVA VISTA: DATOS ======================
+        function renderDataView() {
+            viewContainer.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Importar / Exportar Datos</h2>
+                <p class="text-gray-600 mb-6">Gestiona la copia de seguridad y restauración de toda tu información (clientes, proyectos, pagos y ajustes).</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="card p-6 bg-blue-50 border-blue-200 border">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">
+                            <i class="fas fa-file-export"></i> Exportar Datos
+                        </h3>
+                        <p class="text-blue-700 mb-4">Guarda una copia de seguridad de todos tus datos en un archivo JSON local.</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 mb-6">
+                            <li>El archivo se nombrará: <strong>DataAcuarelaCRM\_[Fecha].json</strong></li>
+                            <li>Incluye clientes, proyectos, pagos y ajustes.</li>
+                        </ul>
+                        <button class="btn-primary bg-blue-500 hover:bg-blue-600 w-full" onclick="exportData()">
+                            <i class="fas fa-download mr-2"></i> Descargar JSON de Datos
+                        </button>
+                    </div>
+
+                    <div class="card p-6 bg-red-50 border-red-200 border">
+                        <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center gap-2">
+                            <i class="fas fa-file-import"></i> Importar Datos
+                        </h3>
+                        <p class="text-red-700 mb-4 font-semibold">ADVERTENCIA: La importación puede modificar o reemplazar tus datos actuales.</p>
+                        
+                        <div id="drop-area" class="border-2 border-dashed border-red-300 rounded-lg p-8 text-center cursor-pointer mb-4 hover:bg-red-100 transition" 
+                             onclick="document.getElementById('import-file').click()"
+                             ondragover="event.preventDefault(); this.classList.add('border-red-500');"
+                             ondragleave="this.classList.remove('border-red-500');"
+                             ondrop="handleDrop(event)">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-red-400 mb-2"></i>
+                            <p class="text-gray-600">Arrastra y suelta tu archivo JSON aquí o haz click para seleccionarlo.</p>
+                        </div>
+                        
+                        <input type="file" id="import-file" accept=".json" class="hidden" onchange="handleFileSelect(event)">
+                        
+                        <button class="btn-primary bg-red-500 hover:bg-red-600 w-full" onclick="document.getElementById('import-file').click()">
+                            <i class="fas fa-upload mr-2"></i> Seleccionar Archivo JSON
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Inicializar drag and drop (necesario ya que el contenido se inyecta dinámicamente)
+            const dropArea = document.getElementById('drop-area');
+            if (dropArea) {
+                dropArea.addEventListener('drop', handleDrop, false);
+                dropArea.addEventListener('dragover', (e) => { e.preventDefault(); dropArea.classList.add('border-red-500'); }, false);
+                dropArea.addEventListener('dragleave', (e) => { dropArea.classList.remove('border-red-500'); }, false);
+            }
+        }
+        // ====================== END NUEVA VISTA: DATOS ======================
 
 
         // ====================================================================
@@ -1980,7 +2045,7 @@
                     <input type="date" id="edit-delivery-date" value="${project.deliveryDate ? project.deliveryDate.substring(0, 10) : ''}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                  </div>
                  `,
-                'Guardar', 'Cancelar' // Etiquetas personalizadas para el modal
+                true, 'Guardar', 'Cancelar'
             ).then(confirmed => {
                 if (confirmed) {
                     const newName = document.getElementById('edit-name').value;
@@ -2059,6 +2124,195 @@
             }
         }
 
+        // ====================================================================
+        // 7. LÓGICA DE IMPORTACIÓN Y EXPORTACIÓN DE DATOS
+        // ====================================================================
+
+        function exportData() {
+            const dataToExport = {
+                clients: state.clients,
+                projects: state.projects,
+                payments: state.payments,
+                settings: state.settings,
+            };
+
+            const jsonString = JSON.stringify(dataToExport, null, 2);
+            const blob = new Blob([jsonString], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+
+            const date = new Date().toISOString().slice(0, 10).replace(/-/g, ''); // Formato YYYYMMDD
+            const filename = `DataAcuarelaCRM_${date}.json`;
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showNotification('Datos exportados con éxito.', 'success');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.currentTarget.classList.remove('border-red-500');
+            const files = event.dataTransfer.files;
+            if (files.length) {
+                processImportFile(files[0]);
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                processImportFile(file);
+            }
+        }
+
+        function processImportFile(file) {
+            if (file.type !== "application/json") {
+                showModal('Error de Archivo', 'El archivo seleccionado no es un JSON válido.', false);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (importedData.clients && importedData.projects) {
+                        await promptImportMode(importedData);
+                    } else {
+                        showModal('Error de Estructura', 'El archivo JSON no tiene el formato esperado (clientes y proyectos).', false);
+                    }
+                } catch (error) {
+                    showModal('Error de Contenido', 'No se pudo leer el contenido del archivo JSON.', false);
+                    console.error('Error al parsear JSON:', error);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        async function promptImportMode(importedData) {
+            const mode = await showModal(
+                'Modo de Importación',
+                `El archivo importado contiene ${importedData.clients.length} clientes y ${importedData.projects.length} proyectos. ¿Cómo deseas proceder?`,
+                true,
+                'Reemplazar Datos',
+                'Añadir a Existentes'
+            );
+
+            if (mode) {
+                // Reemplazar (TRUE)
+                const confirmed = await showModal(
+                    'Confirmar Reemplazo Total',
+                    '<p class="text-red-600 font-bold">ADVERTENCIA: Esta acción eliminará ABSOLUTAMENTE todos los datos actuales y los reemplazará con los del archivo.</p><p class="mt-2">¿Estás completamente segura de querer reemplazar?</p>',
+                    true,
+                    'Sí, Reemplazar Todo',
+                    'No, Cancelar'
+                );
+                if (confirmed) {
+                    replaceData(importedData);
+                }
+            } else {
+                // Añadir a Existentes (FALSE)
+                await appendData(importedData);
+            }
+        }
+
+        function replaceData(importedData) {
+            state.clients = importedData.clients || [];
+            state.projects = importedData.projects || [];
+            state.payments = importedData.payments || [];
+            state.settings = importedData.settings || DEFAULT_MESSAGES;
+            saveData();
+            showNotification('¡Datos reemplazados con éxito! La aplicación se ha actualizado.', 'success');
+            navigate('dashboard');
+        }
+
+        async function appendData(importedData) {
+            let newClients = importedData.clients || [];
+            let newProjects = importedData.projects || [];
+            let newPayments = importedData.payments || [];
+
+            const existingClientNames = new Set(state.clients.map(c => c.name.trim().toLowerCase()));
+            const existingProjectNames = new Set(state.projects.map(p => p.name.trim().toLowerCase()));
+
+            // 1. Manejo de Clientes Duplicados (por nombre exacto)
+            const clientsToKeep = [];
+            for (const newClient of newClients) {
+                const nameKey = newClient.name.trim().toLowerCase();
+                const existingClient = state.clients.find(c => c.name.trim().toLowerCase() === nameKey);
+
+                if (existingClient) {
+                    const choice = await showModal(
+                        'Conflicto de Cliente Duplicado',
+                        `El cliente <strong>"${newClient.name}"</strong> ya existe. ¿Deseas mantener la versión actual o usar la versión importada?`,
+                        true,
+                        'Usar Importada',
+                        'Mantener Actual'
+                    );
+
+                    if (choice) {
+                        // Usar Importada: Sobrescribir el viejo con el nuevo.
+                        state.clients = state.clients.filter(c => c.id !== existingClient.id); // Remover viejo
+                        clientsToKeep.push(newClient); // Añadir nuevo
+                    } else {
+                        // Mantener Actual: No hacer nada (el viejo ya está en state.clients)
+                        // NOTA: Si se usa el "viejo", los proyectos asociados en el JSON importado tendrán IDs de cliente inválidos, pero se añadirán.
+                    }
+                } else {
+                    clientsToKeep.push(newClient);
+                }
+            }
+
+            // Re-filtrar los nuevos clientes para asegurar solo los no duplicados o los que elegimos mantener
+            state.clients.push(...clientsToKeep.filter(c => !state.clients.some(ec => ec.id === c.id)));
+
+            // 2. Manejo de Proyectos Duplicados (por nombre exacto)
+            const projectsToKeep = [];
+            for (const newProject of newProjects) {
+                const nameKey = newProject.name.trim().toLowerCase();
+                const existingProject = state.projects.find(p => p.name.trim().toLowerCase() === nameKey);
+
+                if (existingProject) {
+                    const choice = await showModal(
+                        'Conflicto de Proyecto Duplicado',
+                        `El proyecto <strong>"${newProject.name}"</strong> ya existe. ¿Deseas mantener la versión actual o usar la versión importada?`,
+                        true,
+                        'Usar Importada',
+                        'Mantener Actual'
+                    );
+
+                    if (choice) {
+                        // Usar Importada: Sobrescribir el viejo.
+                        state.projects = state.projects.filter(p => p.id !== existingProject.id); // Remover viejo
+                        projectsToKeep.push(newProject); // Añadir nuevo
+
+                        // Eliminar pagos del proyecto viejo (si los hubiera)
+                        state.payments = state.payments.filter(p => p.projectId !== existingProject.id);
+                    }
+                    // Si elige 'Mantener Actual', no hacemos nada (el viejo se queda).
+                } else {
+                    projectsToKeep.push(newProject);
+                }
+            }
+
+            // Re-filtrar para añadir solo los proyectos que elegimos mantener o no estaban
+            state.projects.push(...projectsToKeep.filter(p => !state.projects.some(ep => ep.id === p.id)));
+
+            // 3. Añadir pagos (se añaden si el ID de proyecto existe, incluso si es un ID de proyecto importado que reemplazó a uno viejo)
+            const finalProjectIds = state.projects.map(p => p.id);
+            const validNewPayments = newPayments.filter(p => finalProjectIds.includes(p.projectId));
+            state.payments.push(...validNewPayments);
+
+            // 4. Actualizar ajustes si existen en el importado
+            state.settings = { ...state.settings, ...importedData.settings };
+
+            saveData();
+            showNotification('Datos importados y añadidos a los existentes. Revisa la lista de Clientes.', 'success');
+            navigate('client_list');
+        }
 
         /**
          * Función principal de renderizado (Router).
@@ -2087,13 +2341,16 @@
                 case 'settings':
                     renderSettings();
                     break;
+                case 'data': // NUEVA VISTA
+                    renderDataView();
+                    break;
                 default:
                     renderDashboard();
             }
         }
 
         // ====================================================================
-        // 7. INICIALIZACIÓN
+        // 8. INICIALIZACIÓN
         // ====================================================================
         window.onload = () => {
             loadData();
@@ -2102,8 +2359,11 @@
             renderApp();
         };
 
-        // Función auxiliar para inicializar la pestaña (se llama al cargar client_detail)
+        // Exportar funciones globales necesarias
         window.switchProjectTab = switchProjectTab;
+        window.exportData = exportData;
+        window.handleDrop = handleDrop;
+        window.handleFileSelect = handleFileSelect;
 
     </script>
 </body>
