@@ -56,7 +56,7 @@ Dado que no se requiere base de datos, la configuración es trivial:
 
 1.  **Clonar el Repositorio:**
     ```bash
-    git clone [https://github.com/TuUsuario/TuRepositorio.git](https://github.com/TuUsuario/TuRepositorio.git)
+    git clone [https://github.com/RafaelAlvarez29/AcuarelaCRM](https://github.com/TuUsuario/TuRepositorio.git)
     cd acuarela-crm
     ```
 2.  **Uso Local:**
