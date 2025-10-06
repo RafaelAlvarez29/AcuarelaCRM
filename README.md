@@ -1,7 +1,7 @@
 # 🎨 Acuarela - papeleria social CRM
 
 <p align="center">
-  <img src="https://github.com/RafaelAlvarez29/AcuarelaCRM/tree/main/icon/ACUARELA%20LOGO3.svg" alt="Logo de Acuarela Design Studio" width="200"/>
+  <img src="https://github.com/RafaelAlvarez29/AcuarelaCRM/blob/main/icon/ACUARELA%20LOGO3.svg" alt="Logo de Acuarela Design Studio" width="200"/>
 </p>
 
 Herramienta interna de gestión de clientes (CRM), proyectos y pagos diseñada a medida para **Acuarela Design Studio**. Su objetivo es simplificar la administración de trabajos activos, monitorear saldos pendientes y optimizar la comunicación.
