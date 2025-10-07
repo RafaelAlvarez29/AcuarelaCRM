@@ -717,17 +717,22 @@
         }
 
         /**
-         * Genera un color pastel aleatorio.
-         * Fuente: https://stackoverflow.com/a/43235760/910023
+         * Array de colores pastel de la paleta.
          */
-        const generatePastelColor = (seed) => {
-            let hash = 0;
-            for (let i = 0; i < seed.length; i++) {
-                hash = seed.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            const h = hash % 360;
-            // Usamos saturación y luminosidad bajas para el efecto pastel
-            return `hsl(${h}, 55%, 75%)`;
+        const PALETTE_COLORS = [
+            '#EBABC3', // Light Pink
+            '#9BD9D8', // Mint/Teal
+            '#D2ABEE', // Lavender
+            '#F7C5A2', // Peach/Orange
+            '#FE9FC1'  // Bright Pink
+        ];
+
+        /**
+         * Genera un color pastel aleatorio de la paleta.
+         */
+        const getPaletteColor = () => {
+            const randomIndex = Math.floor(Math.random() * PALETTE_COLORS.length);
+            return PALETTE_COLORS[randomIndex];
         };
 
         /**
@@ -738,24 +743,25 @@
          */
         const getClientAvatarHtml = (client, size = 'w-10 h-10') => {
             const initial = client.name.charAt(0).toUpperCase();
-            const color = generatePastelColor(client.name);
+            // Usa la nueva función para obtener un color de la paleta
+            const color = getPaletteColor();
             const classes = size.includes('120px') ? '' : 'shadow-md'; // Solo sombra si es el pequeño
 
             if (client.photoBase64) {
                 // Si tiene foto, la mostramos dentro de un div con las clases de tamaño
                 return `
-                    <div class="${size} rounded-full overflow-hidden flex-shrink-0 ${classes}">
-                        <img src="${client.photoBase64}" alt="${initial} Avatar" class="w-full h-full object-cover">
-                    </div>
-                `;
+            <div class="${size} rounded-full overflow-hidden flex-shrink-0 ${classes}">
+                <img src="${client.photoBase64}" alt="${initial} Avatar" class="w-full h-full object-cover">
+            </div>
+        `;
             } else {
-                // Si no tiene foto, mostramos la inicial con color pastel
+                // Si no tiene foto, mostramos la inicial con color pastel de la paleta
                 return `
-                    <div class="${size} rounded-full flex items-center justify-center font-bold text-lg text-white flex-shrink-0 ${classes}" 
-                         style="background-color: ${color};">
-                        ${initial}
-                    </div>
-                `;
+            <div class="${size} rounded-full flex items-center justify-center font-bold text-lg text-white flex-shrink-0 ${classes}" 
+                 style="background-color: ${color};">
+                ${initial}
+            </div>
+        `;
             }
         };
 
@@ -976,7 +982,6 @@
             return `badge-project-status status-${cleanStatus}`;
         }
 
-        // INICIO CORRECCIÓN DE ESTILOS Y UNIFICACIÓN DE TARJETA
         /**
          * Renderiza una tarjeta de proyecto (unificada para Dashboard y Detalle de Cliente).
          * @param {Object} project - Objeto proyecto con sus cálculos de balance.
@@ -994,46 +999,61 @@
             const initialPrice = parseFloat(project.totalPrice);
             const percentPaid = initialPrice > 0 ? (totalPaid / initialPrice) * 100 : 100;
 
-            const imageSrc = project.thumbnailBase64 || `https://placehold.co/120x120/E5E7EB/4B5563?text=${project.name.charAt(0).toUpperCase()}`;
+            // Lógica para determinar la imagen
+            const hasImage = project.thumbnailBase64;
+
+            let imageSrc;
+            if (hasImage) {
+                imageSrc = project.thumbnailBase64;
+            } else {
+                // Obtiene un color aleatorio de la paleta y elimina el '#'
+                const randomHex = getPaletteColor().substring(1);
+                const projectInitial = project.name.charAt(0).toUpperCase();
+
+                // Crea la URL de placehold.co con el color de fondo personalizado (randomHex) 
+                // y el color de texto en negro (333) para mejor contraste.
+                imageSrc = `https://placehold.co/120x120/${randomHex}/333?text=${projectInitial}`;
+            }
+
 
             return `
-                <a href="#" onclick="event.preventDefault(); navigate('project_detail', '${project.clientId}', '${project.id}')" class="project-card-link" aria-label="Ver detalles del proyecto ${project.name}">
-                    <article class="card p-4 transition-all duration-300 hover:shadow-lg">
-                        <div class="project-content-detail">
-                            <img src="${imageSrc}" alt="Vista previa del proyecto ${project.name}" class="project-image-detail">
-                            <div class="flex-1 min-w-0 " style="width: 100%;">
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                                    <h3 class="text-lg font-bold text-gray-900 leading-tight">${project.name} (${client.name})</h3>
-                                    <span class="${statusClass}">
-                                        <i class="fas fa-circle w-3 h-3 text-xs"></i>
-                                        ${project.status}
-                                    </span>
-                                </div>
-                                <p class="text-gray-600 mb-3 text-sm">
-                                    ${project.description.substring(0, 100)}...
-                                </p>
-                                <div class="project-details-row">
-                                    <span class="flex items-center gap-1 text-gray-500">
-                                        <i class="fas fa-calendar-alt w-4 h-4 text-gray-400"></i>
-                                        Entrega: <strong>${project.deliveryDate ? new Date(project.deliveryDate).toLocaleDateString('es-ES') : 'N/A'}</strong>
-                                    </span>
-                                    
-                                    <span class="flex items-center gap-1 ${balance > 0.01 ? 'text-red-600' : 'text-green-600'}">
-                                        <i class="fas fa-dollar-sign w-4 h-4" aria-hidden="true"></i>
-                                        Pago: <strong>$${paid} / $${total}</strong>
-                                    </span>
-                                    <span class="text-sm ${balance > 0.01 ? 'text-red-600 font-bold' : 'text-green-600 font-bold'}">
-                                        ${balance > 0.01 ? `$${balance.toFixed(2)} Pendiente` : `Saldo Pagado`}
-                                    </span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-1 mt-2">
-                                    <div class="h-1 rounded-full ${balance > 0.01 ? 'bg-red-400' : 'bg-green-500'}" style="width: ${percentPaid.toFixed(0)}%; max-width:100%;"></div>
-                                </div>
-                            </div>
+        <a href="#" onclick="event.preventDefault(); navigate('project_detail', '${project.clientId}', '${project.id}')" class="project-card-link" aria-label="Ver detalles del proyecto ${project.name}">
+            <article class="card p-4 transition-all duration-300 hover:shadow-lg">
+                <div class="project-content-detail">
+                    <img src="${imageSrc}" alt="Vista previa del proyecto ${project.name}" class="project-image-detail">
+                    <div class="flex-1 min-w-0 " style="width: 100%;">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 leading-tight">${project.name} (${client.name})</h3>
+                            <span class="${statusClass}">
+                                <i class="fas fa-circle w-3 h-3 text-xs"></i>
+                                ${project.status}
+                            </span>
                         </div>
-                    </article>
-                </a>
-            `;
+                        <p class="text-gray-600 mb-3 text-sm">
+                            ${project.description.substring(0, 100)}...
+                        </p>
+                        <div class="project-details-row">
+                            <span class="flex items-center gap-1 text-gray-500">
+                                <i class="fas fa-calendar-alt w-4 h-4 text-gray-400"></i>
+                                Entrega: <strong>${project.deliveryDate ? new Date(project.deliveryDate).toLocaleDateString('es-ES') : 'N/A'}</strong>
+                            </span>
+                            
+                            <span class="flex items-center gap-1 ${balance > 0.01 ? 'text-red-600' : 'text-green-600'}">
+                                <i class="fas fa-dollar-sign w-4 h-4" aria-hidden="true"></i>
+                                Pago: <strong>$${paid} / $${total}</strong>
+                            </span>
+                            <span class="text-sm ${balance > 0.01 ? 'text-red-600 font-bold' : 'text-green-600 font-bold'}">
+                                ${balance > 0.01 ? `$${balance.toFixed(2)} Pendiente` : `Saldo Pagado`}
+                            </span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-1 mt-2">
+                            <div class="h-1 rounded-full ${balance > 0.01 ? 'bg-red-400' : 'bg-green-500'}" style="width: ${percentPaid.toFixed(0)}%; max-width:100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </a>
+    `;
         }
 
 
