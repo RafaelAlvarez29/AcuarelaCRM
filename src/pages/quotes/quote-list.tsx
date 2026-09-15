@@ -67,12 +67,14 @@ export default function QuoteList() {
       </div>
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {visible.map((quote) => (
-            <QuoteCard key={quote.id} quote={quote} onView={() => navigate(`/cotizaciones/${quote.id}`)} />
-          ))}
-        </div>
-        {hasMore && <LoadMoreButton onClick={loadMore} remaining={filtered.length - visible.length} />}
+        <>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {visible.map((quote) => (
+              <QuoteCard key={quote.id} quote={quote} onView={() => navigate(`/cotizaciones/${quote.id}`)} />
+            ))}
+          </div>
+          {hasMore && <LoadMoreButton onClick={loadMore} remaining={filtered.length - visible.length} />}
+        </>
       ) : quotes.length === 0 ? (
         <EmptyState
           icon={FileText}
