@@ -1,24 +1,26 @@
+import { lazy } from "react"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import { Toaster } from "sonner"
 
 import { AppLayout } from "@/components/layout/app-layout"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import Dashboard from "@/pages/dashboard"
-import Board from "@/pages/board"
-import ClientList from "@/pages/clients/client-list"
-import ClientDetail from "@/pages/clients/client-detail"
-import ClientForm from "@/pages/clients/client-form"
-import ProjectForm from "@/pages/projects/project-form"
-import ProjectDetail from "@/pages/projects/project-detail"
-import ProjectList from "@/pages/projects/project-list"
-import ProductList from "@/pages/products/product-list"
-import ProductForm from "@/pages/products/product-form"
-import EventTypes from "@/pages/event-types"
-import QuoteList from "@/pages/quotes/quote-list"
-import QuoteForm from "@/pages/quotes/quote-form"
-import QuoteDetail from "@/pages/quotes/quote-detail"
-import Settings from "@/pages/settings"
-import DataView from "@/pages/data"
+
+const Board = lazy(() => import("@/pages/board"))
+const ClientList = lazy(() => import("@/pages/clients/client-list"))
+const ClientDetail = lazy(() => import("@/pages/clients/client-detail"))
+const ClientForm = lazy(() => import("@/pages/clients/client-form"))
+const ProjectForm = lazy(() => import("@/pages/projects/project-form"))
+const ProjectDetail = lazy(() => import("@/pages/projects/project-detail"))
+const ProjectList = lazy(() => import("@/pages/projects/project-list"))
+const ProductList = lazy(() => import("@/pages/products/product-list"))
+const ProductForm = lazy(() => import("@/pages/products/product-form"))
+const EventTypes = lazy(() => import("@/pages/event-types"))
+const QuoteList = lazy(() => import("@/pages/quotes/quote-list"))
+const QuoteForm = lazy(() => import("@/pages/quotes/quote-form"))
+const QuoteDetail = lazy(() => import("@/pages/quotes/quote-detail"))
+const Settings = lazy(() => import("@/pages/settings"))
+const DataView = lazy(() => import("@/pages/data"))
 
 export default function App() {
   return (

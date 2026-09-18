@@ -1,10 +1,20 @@
 import { Menu } from "lucide-react"
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { Outlet } from "react-router-dom"
 
 import { SidebarContent } from "@/components/layout/sidebar"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
+
+function PageFallback() {
+  return (
+    <div className="space-y-6">
+      <Skeleton className="h-8 w-48" />
+      <Skeleton className="h-64 w-full" />
+    </div>
+  )
+}
 
 export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -46,7 +56,9 @@ export function AppLayout() {
         </header>
 
         <main className="mx-auto w-full max-w-7xl flex-1 p-4 sm:p-6 lg:p-8">
-          <Outlet />
+          <Suspense fallback={<PageFallback />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
     </div>
