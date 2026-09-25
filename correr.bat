@@ -34,6 +34,13 @@ if not exist "node_modules" (
     )
 )
 
+REM Detecta la IP LAN del adaptador activo (el que tiene puerta de enlace).
+REM Se calcula en cada arranque porque el DHCP puede cambiarla.
+set "IPLAN="
+REM Sin pipes a proposito: dentro de for /f usebackq, cmd pasa el ^| literal
+REM a PowerShell y rompe el comando. Se usa el metodo .Where() en su lugar.
+for /f "usebackq tokens=* delims= " %%i in (`powershell -NoProfile -Command "(Get-NetIPConfiguration).Where({$_.IPv4DefaultGateway -and $_.NetAdapter.Status -eq 'Up'},'First').IPv4Address.IPAddress"`) do set "IPLAN=%%i"
+
 REM Captura el caracter ESC (0x1B) para poder emitir secuencias de escape.
 for /f %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
 
@@ -47,6 +54,11 @@ if defined WT_SESSION (
 ) else (
     echo   URL:  !URL!
 )
+if defined IPLAN (
+    echo   Movil:  http://!IPLAN!:!PUERTO!/     ^(misma red Wi-Fi/cable^)
+) else (
+    echo   Movil:  [no se detecto IP de red - revisa tu conexion]
+)
 echo   Para detener el servidor: Ctrl + C
 echo ===============================================
 echo.
@@ -59,7 +71,7 @@ start "" /b powershell -NoProfile -WindowStyle Hidden -Command ^
 
 REM --strictPort: si el puerto esta ocupado falla en vez de cambiar de puerto
 REM en silencio, lo que dejaria la URL de arriba apuntando al lugar equivocado.
-call npm run dev -- --strictPort --port %PUERTO%
+call npm run dev -- --host --strictPort --port %PUERTO%
 
 echo.
 echo [INFO] El servidor se detuvo.

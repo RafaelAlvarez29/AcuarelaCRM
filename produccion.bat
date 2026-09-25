@@ -66,6 +66,13 @@ if errorlevel 1 (
 )
 
 :servir
+REM Detecta la IP LAN del adaptador activo (el que tiene puerta de enlace).
+REM Se calcula en cada arranque porque el DHCP puede cambiarla.
+set "IPLAN="
+REM Sin pipes a proposito: dentro de for /f usebackq, cmd pasa el ^| literal
+REM a PowerShell y rompe el comando. Se usa el metodo .Where() en su lugar.
+for /f "usebackq tokens=* delims= " %%i in (`powershell -NoProfile -Command "(Get-NetIPConfiguration).Where({$_.IPv4DefaultGateway -and $_.NetAdapter.Status -eq 'Up'},'First').IPv4Address.IPAddress"`) do set "IPLAN=%%i"
+
 REM Captura el caracter ESC (0x1B) para poder emitir secuencias de escape.
 for /f %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
 
@@ -79,6 +86,11 @@ if defined WT_SESSION (
 ) else (
     echo   URL:  !URL!
 )
+if defined IPLAN (
+    echo   Movil:  http://!IPLAN!:!PUERTO!/     ^(misma red Wi-Fi/cable^)
+) else (
+    echo   Movil:  [no se detecto IP de red - revisa tu conexion]
+)
 echo   Para detener el servidor: Ctrl + C
 echo ===============================================
 echo.
@@ -88,7 +100,7 @@ REM Windows no resuelve *.localhost por DNS; solo el navegador lo hace (RFC 6761
 start "" /b powershell -NoProfile -WindowStyle Hidden -Command ^
  "$n=0; while($n -lt 120){ try { $c=[Net.Sockets.TcpClient]::new('127.0.0.1',%PUERTO%); $c.Close(); break } catch { Start-Sleep -Milliseconds 500; $n++ } }; if($n -lt 120){ Start-Process '%URL%' }"
 
-call npm run preview -- --strictPort --port %PUERTO%
+call npm run preview -- --host --strictPort --port %PUERTO%
 
 echo.
 echo [INFO] El servidor se detuvo.
