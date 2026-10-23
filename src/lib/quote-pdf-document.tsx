@@ -4,6 +4,7 @@ import { quoteTotals } from "@/lib/calc"
 import { BRAND_COLORS } from "@/lib/constants"
 import type { Quote, QuoteFormatSettings } from "@/lib/types"
 import { formatCurrency, formatDate } from "@/lib/utils"
+import { buildWhatsAppLink } from "@/lib/whatsapp"
 
 const LOGO_URL = "/icon/android-icon-192x192.png"
 
@@ -266,8 +267,7 @@ export function QuotePDFDocument({
   const deposit = Number(quote.deposit) || 0
   const showDeposit = deposit > 0
   const balance = Math.max(0, totals.total - deposit)
-  const phoneDigits = quoteFormat.phone.replace(/[^0-9]/g, "")
-  const whatsappLink = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(quoteFormat.whatsappMessage)}`
+  const whatsappLink = buildWhatsAppLink(quoteFormat.phone, quoteFormat.whatsappMessage)
 
   return (
     <Document
@@ -286,14 +286,24 @@ export function QuotePDFDocument({
           </View>
           <View style={styles.brandBlock}>
             <Text style={styles.brandName}>{quoteFormat.businessName}</Text>
-            <Text style={styles.brandContact}>
-              <Link href={quoteFormat.mapsUrl} style={styles.link}>
-                {quoteFormat.address}
-              </Link>
-            </Text>
+            {quoteFormat.address && (
+              <Text style={styles.brandContact}>
+                {quoteFormat.mapsUrl ? (
+                  <Link href={quoteFormat.mapsUrl} style={styles.link}>
+                    {quoteFormat.address}
+                  </Link>
+                ) : (
+                  quoteFormat.address
+                )}
+              </Text>
+            )}
             {quoteFormat.phone && (
               <Text style={styles.brandContact}>
-                <Link href={whatsappLink} style={styles.link}>Tel. {quoteFormat.phone}</Link>
+                {whatsappLink ? (
+                  <Link href={whatsappLink} style={styles.link}>Tel. {quoteFormat.phone}</Link>
+                ) : (
+                  `Tel. ${quoteFormat.phone}`
+                )}
               </Text>
             )}
           </View>
@@ -435,7 +445,7 @@ export function QuotePDFDocument({
 
         <View style={styles.footerBand} fixed>
           <Text style={styles.footerText}>
-            {quoteFormat.businessName} · {quoteFormat.phone}
+            {[quoteFormat.businessName, quoteFormat.phone].filter(Boolean).join(" · ")}
           </Text>
           <Text style={styles.footerText} render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
         </View>

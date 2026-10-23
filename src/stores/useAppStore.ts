@@ -1,7 +1,9 @@
+import { useSyncExternalStore } from "react"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
 import { APP_STORAGE_KEY, DEFAULT_MESSAGES, DEFAULT_QUOTE_FORMAT } from "@/lib/constants"
+import { idbStorage } from "@/lib/idb-storage"
 import { uid } from "@/lib/utils"
 import type {
   AppData,
@@ -67,6 +69,20 @@ function normalizeSettings(settings: Settings | undefined | null): Settings {
   }
 
   return { messages, quoteFormat }
+}
+
+/**
+ * Campos del formato de cotización presentes (texto no vacío) en un archivo importado.
+ * Permite cargar los datos del negocio con "Añadir a existentes" sin borrar lo actual.
+ */
+function pickQuoteFormat(raw: unknown): Partial<QuoteFormatSettings> {
+  if (!raw || typeof raw !== "object") return {}
+  const picked: Partial<QuoteFormatSettings> = {}
+  for (const key of Object.keys(DEFAULT_QUOTE_FORMAT) as (keyof QuoteFormatSettings)[]) {
+    const value = (raw as Record<string, unknown>)[key]
+    if (typeof value === "string" && value.trim()) picked[key] = value
+  }
+  return picked
 }
 
 /** Normaliza productos para garantizar el mapa de precios por tipo de evento. */
@@ -368,8 +384,11 @@ export const useAppStore = create<AppStore>()(
           payments: [...s.payments, ...(data.payments ?? [])],
           eventTypes: [...s.eventTypes, ...(data.eventTypes ?? [])],
           settings: {
-            ...normalizeSettings(s.settings),
             messages: { ...s.settings.messages, ...(data.settings?.messages ?? {}) },
+            quoteFormat: {
+              ...normalizeSettings(s.settings).quoteFormat,
+              ...pickQuoteFormat(data.settings?.quoteFormat),
+            },
           },
           products: [...s.products, ...normalizeProducts(data.products)],
           quotes: [...s.quotes, ...normalizeQuotes(data.quotes)],
@@ -391,7 +410,7 @@ export const useAppStore = create<AppStore>()(
     }),
     {
       name: APP_STORAGE_KEY,
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => idbStorage),
       version: 4,
       migrate: (persistedState, version) => {
         if (version < 4) return emptyAppData()
@@ -400,3 +419,13 @@ export const useAppStore = create<AppStore>()(
     },
   ),
 )
+/**
+ * IndexedDB es asíncrono: hasta que termina la hidratación el store está vacío.
+ * La app espera a este hook para no mostrar (ni permitir editar) datos vacíos.
+ */
+export function useStoreHydrated(): boolean {
+  return useSyncExternalStore(
+    (onChange) => useAppStore.persist.onFinishHydration(onChange),
+    () => useAppStore.persist.hasHydrated(),
+  )
+}

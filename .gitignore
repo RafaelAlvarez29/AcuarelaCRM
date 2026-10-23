@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Respaldos con datos reales del negocio (nunca subir al repositorio)
+respaldos/
+DataAcuarelaCRM_*.json

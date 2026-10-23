@@ -14,22 +14,37 @@ export function formatCurrency(value: number): string {
   }).format(Number.isFinite(value) ? value : 0)
 }
 
+const DATE_ONLY_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/
+
+/**
+ * Convierte un valor en Date. Las fechas sin hora ("YYYY-MM-DD", como las de
+ * los inputs de tipo date) se interpretan en hora local: `new Date("2026-10-23")`
+ * las toma como medianoche UTC y en México se mostrarían como el día anterior.
+ */
+export function parseDate(value?: string | Date | null): Date | null {
+  if (!value) return null
+  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value
+  const match = DATE_ONLY_PATTERN.exec(value)
+  const date = match
+    ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))
+    : new Date(value)
+  return Number.isNaN(date.getTime()) ? null : date
+}
+
 /** Formatea una fecha en formato corto en español. */
 export function formatDate(
   value?: string | Date | null,
   options: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" },
 ): string {
-  if (!value) return "N/A"
-  const date = value instanceof Date ? value : new Date(value)
-  if (Number.isNaN(date.getTime())) return "N/A"
+  const date = parseDate(value)
+  if (!date) return "N/A"
   return date.toLocaleDateString("es-MX", options)
 }
 
 /** Formatea una fecha como YYYY-MM-DD para inputs de tipo date. */
 export function toDateInputValue(value?: string | Date | null): string {
-  if (!value) return ""
-  const date = value instanceof Date ? value : new Date(value)
-  if (Number.isNaN(date.getTime())) return ""
+  const date = parseDate(value)
+  if (!date) return ""
   const y = date.getFullYear()
   const m = String(date.getMonth() + 1).padStart(2, "0")
   const d = String(date.getDate()).padStart(2, "0")

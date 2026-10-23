@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useLoadMore } from "@/hooks/useLoadMore"
 import { calculateProjectBalance, isProjectActive } from "@/lib/calc"
 import { formatCurrency } from "@/lib/utils"
-import { generateWhatsAppLink } from "@/lib/whatsapp"
+import { generateWhatsAppLink, openWhatsAppLink } from "@/lib/whatsapp"
 import { useAppStore } from "@/stores/useAppStore"
 import type { ClientWithSummary } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -131,7 +131,7 @@ export default function ClientList() {
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation()
-                          window.open(generateWhatsAppLink(client, settings), "_blank")
+                          openWhatsAppLink(generateWhatsAppLink(client, settings))
                         }}
                       >
                         <MessageCircle className="text-emerald-600 dark:text-emerald-400" aria-hidden /> WhatsApp

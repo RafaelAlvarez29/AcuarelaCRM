@@ -9,7 +9,7 @@ import { StatCard } from "@/components/common/stat-card"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { calculateProjectBalance, isProjectActive, isProjectPaid } from "@/lib/calc"
-import { cn, formatCurrency, formatDate, newProjectPath } from "@/lib/utils"
+import { cn, formatCurrency, formatDate, newProjectPath, parseDate } from "@/lib/utils"
 import { useAppStore } from "@/stores/useAppStore"
 import type { ProjectWithBalance } from "@/lib/types"
 
@@ -134,13 +134,18 @@ export default function Dashboard() {
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
 
-    const upcomingDeadlines = activeProjects
-      .filter((p) => p.deliveryDate && new Date(p.deliveryDate) > today)
-      .sort((a, b) => new Date(a.deliveryDate!).getTime() - new Date(b.deliveryDate!).getTime())
+    // Incluye las entregas de hoy (>= today), no solo las futuras.
+    const withDueDate = activeProjects
+      .map((p) => ({ project: p, due: parseDate(p.deliveryDate) }))
+      .filter((entry): entry is { project: DashboardProject; due: Date } =>
+        entry.due !== null && entry.due >= today,
+      )
+      .sort((a, b) => a.due.getTime() - b.due.getTime())
       .slice(0, 5)
-    const imminentDeadlines = upcomingDeadlines.filter(
-      (p) => new Date(p.deliveryDate!) <= tomorrow,
-    )
+    const upcomingDeadlines = withDueDate.map((entry) => entry.project)
+    const imminentDeadlines = withDueDate
+      .filter((entry) => entry.due <= tomorrow)
+      .map((entry) => entry.project)
 
     return {
       allProjects,

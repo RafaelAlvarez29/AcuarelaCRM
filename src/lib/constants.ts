@@ -51,17 +51,21 @@ export const BRAND_COLORS = {
 export const BUSINESS_NAME = "Acuarela Design Studio"
 export const BUSINESS_SLOGAN = "Papelería social · Diseño a tu medida"
 
-/** Datos por defecto del formato de cotización (personalizables en Ajustes). */
+/**
+ * Datos por defecto del formato de cotización (personalizables en Ajustes).
+ * La dirección, el teléfono y los datos bancarios NO viven en el código (el
+ * repositorio es público): se capturan en Ajustes o se cargan importando el
+ * respaldo con los datos del negocio desde la sección Datos.
+ */
 export const DEFAULT_QUOTE_FORMAT = {
   businessName: "ACUARELA PAPELERIA SOCIAL",
-  address: "GARZA ROMERO 1816, TERRANOVA",
-  phone: "668 254 8438",
-  mapsUrl: "https://maps.app.goo.gl/UPkfd7vsN8A4sXYr5",
+  address: "",
+  phone: "",
+  mapsUrl: "",
   whatsappMessage: "Hola, les escribo por la cotización. ¿Me podrían dar más información?",
   validityText:
     "ESTA COTIZACIÓN TIENE UNA VALIDEZ DE 30 DÍAS. DESPUÉS DE ESTE TIEMPO DEBERÁ SOLICITAR UNA NUEVA COTIZACIÓN. Y ESTARÁ SUJETA A POSIBLES CAMBIOS DE PRECIOS.",
-  footerText:
-    "PARA ABONAR A ESTA COTIZACIÓN O PAGAR EL TOTAL DE LA MISMA. REALICE EL PAGO A LA CUENTA 4152 3143 1401 7180 A NOMBRE DE ITZEL YANNIN MEZA LOYA EN BANCO BBVA BANCOMER MÉXICO. PORFAVOR ENVIAR EL COMPROBANTE POR MEDIO DE SU ORGANIZADOR DE EVENTOS O BIEN AL 668 254 8438, TAMBIEN PUEDE ENVIAR NUESTRO CORREO DE CONTACTO yannin.meza96@gmail.com. QUEDAMOS A SUS ORDENES Y SERVICIO. SALUDOS CORDIALES.",
+  footerText: "",
 } as const
 
 export type QuoteFormatDefaults = typeof DEFAULT_QUOTE_FORMAT

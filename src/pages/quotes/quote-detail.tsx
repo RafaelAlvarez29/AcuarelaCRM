@@ -34,6 +34,7 @@ import { downloadQuotePdf } from "@/lib/quote-pdf"
 import type { QuoteStatus } from "@/lib/types"
 import { QUOTE_STATUSES } from "@/lib/types"
 import { cn, formatCurrency, formatDate } from "@/lib/utils"
+import { buildWhatsAppLink, openWhatsAppLink } from "@/lib/whatsapp"
 import { useAppStore } from "@/stores/useAppStore"
 
 export default function QuoteDetail() {
@@ -45,6 +46,11 @@ export default function QuoteDetail() {
   const deleteQuote = useAppStore((s) => s.deleteQuote)
   const addProject = useAppStore((s) => s.addProject)
   const quoteFormat = useAppStore((s) => s.settings.quoteFormat)
+  const quoteClient = useAppStore((s) =>
+    quote?.clientId ? s.clients.find((c) => c.id === quote.clientId) : undefined,
+  )
+  // Una cotización solo genera un proyecto: si ya existe, se enlaza en lugar de duplicarlo.
+  const existingProject = useAppStore((s) => s.projects.find((p) => p.sourceQuoteId === id))
 
   const [downloading, setDownloading] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -119,11 +125,19 @@ export default function QuoteDetail() {
 
   const handleConvert = () => {
     if (converting) return
+    if (existingProject) {
+      navigate(`/proyectos/${existingProject.id}`)
+      return
+    }
+    if (!quoteClient) {
+      toast.error("La cotización no tiene un cliente válido. Edítala y asigna uno antes de convertirla.")
+      return
+    }
     setConverting(true)
     try {
       const lines = quote.items.map((i) => `• ${i.name}${i.description ? ` (${i.description})` : ""}`).join("\n")
       const projectId = addProject({
-        clientId: quote.clientId ?? "",
+        clientId: quoteClient.id,
         name: `Cotización ${quote.code}`,
         totalPrice: totals.total,
         description: `Proyecto generado desde la cotización ${quote.code}.\n\n${lines}`,
@@ -133,6 +147,7 @@ export default function QuoteDetail() {
         thumbnailBase64: null,
         sourceQuoteId: quote.id,
       })
+      if (quote.status !== "Aprobada") updateQuote(quote.id, { status: "Aprobada" })
       toast.success("Proyecto creado desde la cotización.")
       navigate(`/proyectos/${projectId}`)
     } catch {
@@ -142,12 +157,8 @@ export default function QuoteDetail() {
   }
 
   const handleWhatsApp = () => {
-    const message = encodeURIComponent(
-      `Hola ${quote.clientName}, te comparto mi cotización ${quote.code} por un total de ${formatCurrency(totals.total)}. ¡Quedo atenta a tus comentarios!`,
-    )
-    const number = quote.clientPhone.replace(/[^0-9]/g, "")
-    const safeNumber = number.length >= 10 ? number : "5215512345678"
-    window.open(`https://wa.me/${safeNumber}?text=${message}`, "_blank")
+    const message = `Hola ${quote.clientName}, te comparto mi cotización ${quote.code} por un total de ${formatCurrency(totals.total)}. ¡Quedo atenta a tus comentarios!`
+    openWhatsAppLink(buildWhatsAppLink(quote.clientPhone, message))
   }
 
   return (
@@ -331,10 +342,18 @@ export default function QuoteDetail() {
               <Button
                 variant="outline"
                 className="w-full"
-                disabled={!quote.clientId}
+                disabled={!existingProject && !quoteClient}
                 onClick={handleConvert}
               >
-                <FolderPlus aria-hidden /> Convertir en proyecto
+                {existingProject ? (
+                  <>
+                    <ArrowRight aria-hidden /> Ver proyecto generado
+                  </>
+                ) : (
+                  <>
+                    <FolderPlus aria-hidden /> Convertir en proyecto
+                  </>
+                )}
               </Button>
               <Button
                 variant="outline"

@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { calculateProjectBalance, isProjectActive } from "@/lib/calc"
 import { formatCurrency, formatDate } from "@/lib/utils"
-import { generateWhatsAppLink } from "@/lib/whatsapp"
+import { generateWhatsAppLink, openWhatsAppLink } from "@/lib/whatsapp"
 import { useAppStore } from "@/stores/useAppStore"
 import { cn } from "@/lib/utils"
 import type { ProjectWithBalance } from "@/lib/types"
@@ -160,7 +160,7 @@ export default function ClientDetail() {
               <Pencil aria-hidden /> Editar Cliente
             </Button>
             <WhatsAppButton
-              onClick={() => window.open(generateWhatsAppLink(client, settings), "_blank")}
+              onClick={() => openWhatsAppLink(generateWhatsAppLink(client, settings))}
             >
               <MessageCircle aria-hidden /> Iniciar Chat
             </WhatsAppButton>

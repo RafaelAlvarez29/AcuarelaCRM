@@ -2,10 +2,12 @@ import { Menu } from "lucide-react"
 import { Suspense, useState } from "react"
 import { Outlet } from "react-router-dom"
 
+import { BackupReminder } from "@/components/common/backup-reminder"
 import { SidebarContent } from "@/components/layout/sidebar"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useStoreHydrated } from "@/stores/useAppStore"
 
 function PageFallback() {
   return (
@@ -18,6 +20,7 @@ function PageFallback() {
 
 export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const hydrated = useStoreHydrated()
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,9 +59,16 @@ export function AppLayout() {
         </header>
 
         <main className="mx-auto w-full max-w-7xl flex-1 p-4 sm:p-6 lg:p-8">
-          <Suspense fallback={<PageFallback />}>
-            <Outlet />
-          </Suspense>
+          {hydrated ? (
+            <>
+              <BackupReminder />
+              <Suspense fallback={<PageFallback />}>
+                <Outlet />
+              </Suspense>
+            </>
+          ) : (
+            <PageFallback />
+          )}
         </main>
       </div>
     </div>

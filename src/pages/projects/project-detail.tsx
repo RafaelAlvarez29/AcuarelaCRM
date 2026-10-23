@@ -26,7 +26,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { calculateProjectBalance } from "@/lib/calc"
 import { formatCurrency, formatDate, toDateInputValue } from "@/lib/utils"
-import { generateWhatsAppLink } from "@/lib/whatsapp"
+import { generateWhatsAppLink, openWhatsAppLink } from "@/lib/whatsapp"
 import { useAppStore } from "@/stores/useAppStore"
 import { cn } from "@/lib/utils"
 import { PROJECT_STATUSES } from "@/lib/types"
@@ -87,6 +87,15 @@ export default function ProjectDetail() {
       toast.error("Introduce un monto de abono válido y positivo.")
       return
     }
+    // No se permite abonar más que el saldo pendiente: dejaría un saldo negativo.
+    if (value > balance + 0.01) {
+      toast.error(
+        balance > 0.01
+          ? `El abono excede el saldo pendiente (${formatCurrency(balance)}).`
+          : "Este proyecto ya no tiene saldo pendiente.",
+      )
+      return
+    }
     addPayment(project.id, value)
     toast.success(`Abono de ${formatCurrency(value)} registrado.`)
     setAmount("")
@@ -103,9 +112,7 @@ export default function ProjectDetail() {
     navigate(`/clientes/${project.clientId}`)
   }
 
-  const whatsappLink = client
-    ? generateWhatsAppLink(client, settings, project, balance)
-    : "#"
+  const whatsappLink = client ? generateWhatsAppLink(client, settings, project, balance) : null
 
   return (
     <div className="space-y-6">
@@ -148,7 +155,7 @@ export default function ProjectDetail() {
                     <WhatsAppButton
                       size="sm"
                       label="Mensaje de estado"
-                      onClick={() => window.open(whatsappLink, "_blank")}
+                      onClick={() => openWhatsAppLink(whatsappLink)}
                     />
                     <Button variant="outline" size="sm" onClick={() => navigate(`/cotizaciones/nueva?cliente=${client.id}`)}>
                       <FileText aria-hidden /> Cotización
@@ -220,6 +227,7 @@ export default function ProjectDetail() {
                   type="number"
                   step="0.01"
                   min="0"
+                  max={balance > 0 ? balance : undefined}
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="Monto del abono ($)"

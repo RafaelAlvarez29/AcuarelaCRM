@@ -36,18 +36,21 @@ export function quoteSubtotal(items: QuoteItem[]): number {
 /** Calcula descuento, impuesto y totales de una cotización. */
 export function quoteTotals(quote: Pick<Quote, "items" | "discountType" | "discountValue" | "taxRate">): QuoteTotals {
   const subtotal = quoteSubtotal(quote.items)
-  const discount =
+  const rawDiscount =
     quote.discountType === "percent"
       ? subtotal * (Number(quote.discountValue || 0) / 100)
       : Number(quote.discountValue || 0)
+  // El descuento se limita a [0, subtotal] antes de calcular impuesto y total,
+  // para que lo mostrado coincida con lo cobrado y el total nunca sea negativo.
+  const discount = Math.min(Math.max(rawDiscount, 0), subtotal)
 
   const discountedSubtotal = subtotal - discount
-  const tax = discountedSubtotal * (Number(quote.taxRate || 0) / 100)
+  const tax = discountedSubtotal * (Math.max(Number(quote.taxRate || 0), 0) / 100)
   const total = discountedSubtotal + tax
 
   return {
     subtotal: Number(subtotal.toFixed(2)),
-    discount: Number(Math.min(discount, subtotal).toFixed(2)),
+    discount: Number(discount.toFixed(2)),
     taxable: Number(discountedSubtotal.toFixed(2)),
     tax: Number(tax.toFixed(2)),
     total: Number(total.toFixed(2)),

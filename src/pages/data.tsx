@@ -43,12 +43,15 @@ export default function DataView() {
 
   const processFile = async (file?: File) => {
     if (!file) return
-    const data = await readBackupFile(file)
-    if (!data) {
+    const result = await readBackupFile(file)
+    if (!result) {
       toast.error("El archivo seleccionado no es un JSON de respaldo válido.")
       return
     }
-    setPendingImport(data)
+    if (result.discarded > 0) {
+      toast.warning(`Se descartarán ${result.discarded} registros con datos incompletos o inválidos.`)
+    }
+    setPendingImport(result.data)
   }
 
   const handleReplace = () => {
@@ -205,11 +208,12 @@ export default function DataView() {
               <DialogTitle>Modo de Importación</DialogTitle>
               <DialogDescription>
                 El archivo contiene <strong>{pendingImport.clients.length} clientes</strong> y{" "}
-                <strong>{pendingImport.projects.length} proyectos</strong>. ¿Cómo deseas proceder?
+                <strong>{pendingImport.projects.length} proyectos</strong>
+                {pendingImport.settings?.quoteFormat ? ", además del formato de cotización (datos del negocio)" : ""}. ¿Cómo deseas proceder?
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-300">
-              Al fusionar se omitirán duplicados por nombre; al reemplazar se borrará todo el contenido actual.
+              Al fusionar se omitirán duplicados por nombre y se aplicarán los datos del formato de cotización que traiga el archivo; al reemplazar se borrará todo el contenido actual.
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => void handleMerge()}>
